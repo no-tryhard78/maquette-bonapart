@@ -1,0 +1,1203 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Bonapart Visites</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#85C441; --green-d:#6AA62E; --green-l:#EEF7E4;
+  --orange:#FF9F43; --orange-d:#F08A26; --orange-l:#FFF2E5;
+  --navy:#3C3956; --navy-l:#E7E6EE;
+  --muted:#817F96; --mist:#F0EFF2; --line:#E4E3EA; --white:#fff;
+  --red:#E5484D;
+  --font:"Avenir Next","Avenir","Nunito Sans",system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--font);color:var(--navy);background:var(--mist);line-height:1.4;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+img{display:block}
+
+/* ---------- Page ---------- */
+.page-head{background:var(--white);border-bottom:1px solid var(--line)}
+.page-head-in{max-width:1500px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;gap:20px;justify-content:space-between}
+.brand-logo{height:46px;width:auto}
+.brand-fallback{display:none;font-weight:800;font-size:28px;color:var(--green);letter-spacing:-.5px}
+.page-head .tag{font-size:13px;color:var(--muted);background:var(--mist);padding:6px 12px;border-radius:999px}
+
+.intro{max-width:1500px;margin:0 auto;padding:56px 32px 8px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:end}
+.intro h1{font-size:clamp(34px,4.2vw,56px);line-height:1.05;letter-spacing:-1.5px;font-weight:700;max-width:17ch}
+.intro p{font-size:18px;color:var(--muted);max-width:46ch;margin-top:18px}
+.clock{display:flex;align-items:stretch;gap:0;background:var(--white);border-radius:22px;padding:22px 26px;box-shadow:0 1px 0 var(--line),0 18px 40px -24px rgba(60,57,86,.35)}
+.clock div{flex:1}
+.clock div+div{border-left:1px solid var(--line);padding-left:22px;margin-left:22px}
+.clock small{display:block;font-size:13px;color:var(--muted)}
+.clock strong{display:block;font-size:30px;font-weight:700;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.clock .hl strong{color:var(--green-d)}
+
+.flow{max-width:1680px;margin:0 auto;padding:44px 32px 72px;display:flex;flex-wrap:wrap;justify-content:center;gap:56px 24px}
+.step{width:300px;max-width:100%}
+.step{display:flex;flex-direction:column;align-items:center}
+.cap{width:100%;max-width:300px;margin-top:22px}
+.cap .n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;margin-bottom:8px}
+.cap h2{font-size:17px;font-weight:700;letter-spacing:-.2px}
+.cap p{font-size:14px;color:var(--muted);margin-top:4px}
+
+.foot{max-width:1500px;margin:0 auto;padding:0 32px 48px;font-size:13px;color:var(--muted)}
+
+/* ---------- Phone ---------- */
+.phone{width:300px;max-width:100%;height:640px;background:#1d1c27;border-radius:46px;padding:9px;box-shadow:0 40px 60px -30px rgba(60,57,86,.55),inset 0 0 0 2px #3a3947}
+.screen{position:relative;height:100%;background:var(--mist);color:var(--navy);border-radius:38px;overflow:hidden;display:flex;flex-direction:column;font-size:13px}
+.island{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:86px;height:25px;background:#000;border-radius:20px;z-index:5}
+.status{height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:6px 26px 0;font-size:13px;font-weight:700}
+.status .sig{display:flex;gap:5px;align-items:center}
+.body{flex:1;overflow:hidden;padding:0 16px;display:flex;flex-direction:column;min-height:0}
+.scroll{flex:1;overflow:auto;scrollbar-width:none;min-height:0}
+.scroll::-webkit-scrollbar{display:none}
+.tabbar{flex:none;height:66px;background:rgba(255,255,255,.94);border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:flex-start;padding-top:9px;font-size:10px;color:var(--muted)}
+.tabbar span{display:flex;flex-direction:column;align-items:center;gap:3px;position:relative}
+.tabbar .on{color:var(--green-d);font-weight:700}
+.tabbar .badge{position:absolute;top:-4px;right:2px;background:var(--orange);color:#fff;font-size:9px;font-weight:700;min-width:15px;height:15px;border-radius:8px;display:grid;place-items:center;padding:0 3px}
+.home{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);width:110px;height:4px;border-radius:3px;background:var(--navy);opacity:.85}
+
+/* shared atoms */
+.row{display:flex;align-items:center;gap:10px}
+.av{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:13px;color:var(--navy);background:var(--navy-l)}
+.av.g{background:var(--green-l);color:var(--green-d)}
+.av.o{background:var(--orange-l);color:var(--orange-d)}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.p-new{background:var(--navy-l);color:var(--navy)}
+.p-qual{background:#F1F0F5;color:var(--muted)}
+.p-ok{background:var(--green-l);color:var(--green-d)}
+.p-visit{background:var(--orange-l);color:var(--orange-d)}
+.type{font-size:10.5px;font-weight:700;color:var(--muted);border:1px solid var(--line);padding:2px 6px;border-radius:6px;background:var(--white)}
+.card{background:var(--white);border-radius:18px;padding:14px}
+.muted{color:var(--muted)}
+.icon{width:18px;height:18px;flex:none}
+
+/* roof gauge */
+.gauge{position:relative;flex:none;display:grid;place-items:center}
+.gauge svg{display:block}
+.gauge b{position:absolute;bottom:14%;left:0;right:0;text-align:center;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+
+/* ---------- Screen 1 : demandes ---------- */
+.s1-top{display:flex;align-items:center;justify-content:space-between;margin:2px 0 14px}
+.s1-top img{height:26px}
+.s1-top .bell{position:relative;width:34px;height:34px;border-radius:50%;background:var(--white);display:grid;place-items:center}
+.s1-top .bell i{position:absolute;top:7px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--orange);border:2px solid #fff}
+.hello{font-size:13px;color:var(--muted)}
+.big{font-size:23px;font-weight:700;letter-spacing:-.5px;line-height:1.15;margin-top:2px}
+.seg{display:flex;background:var(--white);border-radius:12px;padding:3px;margin:14px 0 12px}
+.seg button{flex:1;padding:7px 0;border-radius:9px;font-size:12px;font-weight:600;color:var(--muted)}
+.seg .on{background:var(--navy);color:#fff}
+.alert{display:flex;align-items:center;gap:10px;background:var(--orange);color:#fff;border-radius:16px;padding:12px 14px;margin-bottom:12px;width:100%;text-align:left}
+.alert strong{display:block;font-size:13.5px}
+.alert small{font-size:11.5px;opacity:.92}
+.alert .go{margin-left:auto;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center}
+.lead{display:flex;gap:10px;align-items:center;padding:11px 12px;background:var(--white);border-radius:16px;margin-bottom:8px}
+.lead .mid{flex:1;min-width:0}
+.lead .nm{display:flex;justify-content:space-between;gap:6px;font-weight:700;font-size:13.5px;white-space:nowrap}
+.lead .nm em{font-style:normal;overflow:hidden;text-overflow:ellipsis}
+.lead .nm span{font-weight:600;font-size:11px;color:var(--muted)}
+.lead .ad{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:1px 0 6px}
+.lead .meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.lead.fresh{box-shadow:inset 3px 0 0 var(--green)}
+.speed{font-size:10.5px;font-weight:700;color:var(--green-d);display:inline-flex;align-items:center;gap:3px}
+
+/* ---------- Screen 2 : fiche ---------- */
+.nav{display:flex;align-items:center;justify-content:space-between;margin:0 0 10px}
+.nav .bk{width:34px;height:34px;border-radius:50%;background:var(--white);display:grid;place-items:center}
+.nav .t{font-weight:700;font-size:14px}
+.who{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.who h3{font-size:19px;letter-spacing:-.3px;line-height:1.1}
+.who p{font-size:12px;color:var(--muted);margin-top:2px}
+.listing{display:flex;gap:10px;align-items:center;background:var(--white);border-radius:16px;padding:8px;margin-bottom:10px}
+.ph{width:64px;height:56px;border-radius:11px;object-fit:cover;flex:none;background:linear-gradient(135deg,#cfd8c4,#a9b59b)}
+.listing b{display:block;font-size:12.5px}
+.listing small{display:block;font-size:11px;color:var(--muted)}
+.listing .pr{font-weight:800;color:var(--navy);font-size:12.5px;margin-top:3px}
+.qual{display:flex;gap:14px;align-items:center}
+.qual h4{font-size:13.5px}
+.qual p{font-size:11.5px;color:var(--muted);margin-top:2px}
+.qlist{margin-top:10px;border-top:1px solid var(--line)}
+.qlist li{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);font-size:12px}
+.qlist li:last-child{border-bottom:0}
+.qlist li span{color:var(--muted);display:flex;align-items:center;gap:7px}
+.qlist li b{font-weight:700;text-align:right}
+.ok{width:16px;height:16px;border-radius:50%;background:var(--green);display:grid;place-items:center;flex:none}
+.wait{width:16px;height:16px;border-radius:50%;border:2px dashed var(--line);flex:none}
+.tl{margin-top:10px}
+.tl h4{font-size:13px;margin-bottom:6px}
+.tl li{list-style:none;display:grid;grid-template-columns:52px 12px 1fr;gap:8px;align-items:start;font-size:11.5px;padding-bottom:7px;position:relative}
+.tl li time{color:var(--muted);font-variant-numeric:tabular-nums}
+.tl li i{width:9px;height:9px;border-radius:50%;background:var(--navy-l);margin-top:3px;position:relative}
+.tl li:not(:last-child) i::after{content:"";position:absolute;left:3.5px;top:11px;width:2px;height:16px;background:var(--line)}
+.tl li.done i{background:var(--green)}
+.tl li em{font-style:normal;font-weight:700;color:var(--green-d)}
+
+/* ---------- Screen 3 : conversation ---------- */
+.chat-head{display:flex;align-items:center;gap:10px;padding:0 0 10px;border-bottom:1px solid var(--line);margin:0 -16px;padding-left:16px;padding-right:16px;background:var(--mist)}
+.chat-head .mid{flex:1}
+.chat-head b{font-size:14px;display:block}
+.live{font-size:11px;color:var(--green-d);font-weight:700;display:flex;align-items:center;gap:5px}
+.live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px var(--green-l)}
+.live.off{color:var(--orange-d)}
+.live.off::before{background:var(--orange);box-shadow:0 0 0 3px var(--orange-l)}
+.take{font-size:11.5px;font-weight:700;color:var(--navy);background:var(--white);border:1px solid var(--line);padding:7px 10px;border-radius:10px}
+.take.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.msgs{padding:12px 0 8px;display:flex;flex-direction:column;gap:8px}
+.day{align-self:center;font-size:10.5px;color:var(--muted);background:var(--white);padding:3px 9px;border-radius:999px}
+.m{max-width:84%;padding:9px 11px;border-radius:16px;font-size:12px;line-height:1.38}
+.m.ai{background:var(--white);border-bottom-left-radius:5px;align-self:flex-start}
+.m.ai .by{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--green-d);margin-bottom:3px}
+.m.me{background:var(--navy);color:#fff;border-bottom-right-radius:5px;align-self:flex-end}
+.m time{display:block;font-size:9.5px;opacity:.6;margin-top:3px;text-align:right}
+.slots{display:flex;flex-direction:column;gap:5px;margin-top:7px}
+.slots span{display:flex;justify-content:space-between;border:1px solid var(--line);border-radius:10px;padding:6px 9px;font-weight:600;font-size:11.5px}
+.slots span.pick{border-color:var(--green);background:var(--green-l);color:var(--green-d)}
+.compose{flex:none;margin:0 -16px;padding:8px 16px 10px;background:var(--mist);border-top:1px solid var(--line)}
+.compose div{background:var(--white);border-radius:14px;padding:9px 12px;font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:7px}
+
+/* ---------- Screen 4 : visite ---------- */
+.vcard{background:var(--white);border-radius:20px;padding:14px;margin-bottom:10px}
+.when{display:flex;gap:12px;align-items:center}
+.date{flex:none;width:52px;border-radius:13px;overflow:hidden;text-align:center;border:1px solid var(--line)}
+.date small{display:block;background:var(--orange);color:#fff;font-size:10px;font-weight:700;padding:2px 0}
+.date b{display:block;font-size:21px;line-height:1.15;padding:3px 0 1px}
+.date i{display:block;font-style:normal;font-size:9.5px;color:var(--muted);padding-bottom:4px}
+.when h4{font-size:15px;letter-spacing:-.2px}
+.when p{font-size:11.5px;color:var(--muted)}
+.vprospect{display:flex;align-items:center;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.vprospect .mid{flex:1}
+.vprospect b{font-size:12.5px;display:block}
+.vprospect small{font-size:11px;color:var(--muted)}
+.agenda{background:var(--white);border-radius:20px;padding:12px 14px;margin-bottom:10px}
+.agenda .hd{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:6px}
+.agenda .hd b{font-size:12.5px}
+.slot{display:grid;grid-template-columns:38px 1fr;gap:8px;align-items:stretch;min-height:30px}
+.slot time{font-size:10.5px;color:var(--muted);padding-top:2px;font-variant-numeric:tabular-nums}
+.slot div{border-top:1px solid var(--line);padding:3px 0}
+.ev{display:block;border-radius:8px;padding:5px 8px;font-size:11px;font-weight:600}
+.ev.busy{background:var(--navy-l);color:var(--navy)}
+.ev.prov{background:repeating-linear-gradient(135deg,var(--orange-l),var(--orange-l) 6px,#FFE7CF 6px,#FFE7CF 12px);color:var(--orange-d);border:1.5px dashed var(--orange)}
+.ev.conf{background:var(--green);color:#fff;border:1.5px solid var(--green)}
+.field{background:var(--white);border-radius:16px;padding:10px 12px;margin-bottom:10px}
+.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}
+.field input{width:100%;border:0;font:inherit;font-size:12.5px;font-weight:600;color:var(--navy);background:transparent}
+.field input::placeholder{color:#B5B3C3;font-weight:600}
+.btn{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:12px;border-radius:14px;font-weight:700;font-size:13.5px}
+.btn.primary{background:var(--green);color:#fff}
+.btn.primary:hover{background:var(--green-d)}
+.btn.ghost{background:transparent;color:var(--navy);font-size:12.5px;padding:9px}
+.done-msg{display:none;align-items:flex-start;gap:9px;background:var(--green-l);color:var(--green-d);border-radius:14px;padding:11px 12px;font-size:12px;font-weight:600;margin-bottom:8px}
+.confirmed .done-msg{display:flex}
+.confirmed .btn.primary,.confirmed .btn.ghost,.confirmed .field{display:none}
+.confirmed-pill{display:none}
+.confirmed .confirmed-pill{display:inline-flex}
+.confirmed .prov-pill{display:none}
+
+/* ---------- Screen 5 : récap mail ---------- */
+.mail-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:12px;color:#0A84FF;font-weight:600}
+.mail-from{display:flex;gap:10px;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.mail-from b{font-size:13px;display:block}
+.mail-from small{font-size:11px;color:var(--muted)}
+.mail{background:var(--white);border-radius:20px;padding:16px 14px}
+.mail img{height:24px;margin-bottom:12px}
+.mail h3{font-size:17px;letter-spacing:-.3px;line-height:1.2}
+.mail .sub{font-size:11.5px;color:var(--muted);margin:3px 0 12px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}
+.kpis div{background:var(--mist);border-radius:12px;padding:8px}
+.kpis b{display:block;font-size:20px;letter-spacing:-.4px;line-height:1.1}
+.kpis small{font-size:10px;color:var(--muted);line-height:1.2;display:block}
+.kpis .o b{color:var(--orange-d)}
+.kpis .g b{color:var(--green-d)}
+.mail h5{font-size:12px;margin:12px 0 6px}
+.vis{display:flex;gap:9px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);font-size:11.5px}
+.vis:last-of-type{border-bottom:0}
+.vis time{font-weight:800;width:38px;font-variant-numeric:tabular-nums}
+.vis .mid{flex:1;min-width:0}
+.vis small{display:block;color:var(--muted);font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.flag{display:flex;gap:8px;background:var(--orange-l);border-radius:12px;padding:9px 10px;font-size:11px;margin-top:10px}
+.flag b{display:block;font-size:11.5px}
+.cta{display:block;text-align:center;background:var(--orange);color:#fff;font-weight:700;border-radius:12px;padding:10px;margin-top:12px;font-size:12.5px}
+
+
+/* ---------- Toggle ---------- */
+.switch{max-width:1500px;margin:0 auto;padding:36px 32px 0;display:flex;justify-content:center}
+.switch div{display:inline-flex;background:var(--white);border-radius:14px;padding:4px;box-shadow:0 1px 0 var(--line)}
+.switch button{display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:11px;font-weight:700;font-size:14px;color:var(--muted)}
+.switch button[aria-selected="true"]{background:var(--navy);color:#fff}
+.view[hidden]{display:none!important}
+
+/* ---------- Desktop ---------- */
+.desk{max-width:1400px;margin:0 auto;padding:40px 32px 72px;display:flex;flex-direction:column;gap:64px}
+.win{background:var(--white);border-radius:16px;overflow:hidden;box-shadow:0 50px 80px -40px rgba(60,57,86,.45),0 0 0 1px var(--line)}
+.chrome{height:40px;display:flex;align-items:center;gap:14px;padding:0 16px;background:#F7F7F9;border-bottom:1px solid var(--line)}
+.dots{display:flex;gap:7px}.dots i{width:11px;height:11px;border-radius:50%;background:#E0DFE6}
+.dots i:nth-child(1){background:#FF6159}.dots i:nth-child(2){background:#FFBD2E}.dots i:nth-child(3){background:#28C941}
+.url{flex:1;max-width:420px;margin:0 auto;background:var(--white);border:1px solid var(--line);border-radius:8px;height:26px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;color:var(--muted)}
+.stage{position:relative;overflow:hidden}
+.app{width:1280px;height:840px;transform-origin:0 0;display:grid;grid-template-columns:232px 1fr;background:var(--mist);font-size:13px}
+.side{background:var(--white);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:20px 14px}
+.side>img{height:34px;width:auto;align-self:flex-start;margin:0 6px 20px}
+.agency{display:flex;align-items:center;justify-content:space-between;background:var(--mist);border-radius:12px;padding:9px 12px;margin-bottom:18px;font-weight:700}
+.agency small{display:block;font-weight:600;font-size:11px;color:var(--muted)}
+.navl a{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:11px;color:var(--muted);font-weight:600;text-decoration:none;margin-bottom:2px}
+.navl a.on{background:var(--green-l);color:var(--green-d)}
+.navl a span{margin-left:auto;font-size:11px;font-weight:700;background:var(--mist);color:var(--navy);padding:2px 8px;border-radius:999px}
+.navl a.on span{background:var(--green);color:#fff}
+.navl a .hot{background:var(--orange);color:#fff}
+.side .bot{margin-top:auto}
+.aistate{background:var(--navy);color:#fff;border-radius:14px;padding:14px;margin-bottom:12px}
+.aistate .live{color:#B8E28C}
+.aistate .live::before{box-shadow:0 0 0 3px rgba(133,196,65,.3)}
+.aistate p{font-size:11.5px;opacity:.75;margin-top:6px;line-height:1.35}
+.aistate b{font-size:22px;letter-spacing:-.4px;display:block;margin-top:2px;opacity:1}
+.me{display:flex;align-items:center;gap:10px;padding:6px}
+.me b{display:block;font-size:12.5px}.me small{font-size:11px;color:var(--muted)}
+
+.mainc{display:flex;flex-direction:column;min-width:0;min-height:0}
+.topb{height:66px;flex:none;display:flex;align-items:center;gap:16px;padding:0 24px;background:var(--white);border-bottom:1px solid var(--line)}
+.topb h1{font-size:20px;letter-spacing:-.4px}
+.search{margin-left:auto;width:300px;height:38px;border-radius:11px;background:var(--mist);display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--muted);font-size:12.5px}
+.topb .bell{position:relative;width:38px;height:38px;border-radius:11px;background:var(--mist);display:grid;place-items:center}
+.topb .bell i{position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--orange);border:2px solid var(--mist)}
+.btn-o{background:var(--orange);color:#fff;font-weight:700;border-radius:11px;padding:10px 16px;font-size:13px}
+
+.panes{flex:1;min-height:0;display:grid;grid-template-columns:330px 1fr 340px}
+.pane{min-height:0;overflow:hidden;display:flex;flex-direction:column}
+.inbox{border-right:1px solid var(--line);padding:16px 14px 0}
+.inbox .seg{margin:0 0 12px}
+.inbox .lead{padding:12px}
+.inbox .lead.sel{box-shadow:0 0 0 2px var(--green)}
+.convo{background:#F6F6F8;padding:0 24px}
+.convo .chat-head{margin:0 -24px;padding:14px 24px;background:var(--white)}
+.convo .chat-head b{font-size:15px}
+.convo .msgs{gap:10px;padding:18px 0}
+.convo .m{max-width:70%;font-size:13px;padding:11px 13px}
+.convo .compose{margin:0 -24px;padding:12px 24px;background:var(--white)}
+.convo .compose div{background:var(--mist)}
+.detail{border-left:1px solid var(--line);background:var(--white);padding:18px 18px 0;overflow:auto;scrollbar-width:none}
+.detail .who h3{font-size:18px}
+.detail .listing{background:var(--mist)}
+.detail .card{background:var(--mist)}
+.detail .qlist li{border-color:#E2E1E9}
+.visit-mini{border:1.5px dashed var(--orange);background:var(--orange-l);border-radius:16px;padding:12px;margin:12px 0}
+.visit-mini .t{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.visit-mini p{font-size:12px;color:var(--muted);margin:2px 0 10px}
+.visit-mini .acts{display:flex;gap:8px}
+.visit-mini .acts button{flex:1;padding:9px;border-radius:11px;font-weight:700;font-size:12.5px}
+.visit-mini .ok-b{background:var(--green);color:#fff}
+.visit-mini .alt-b{background:var(--white);border:1px solid var(--line)}
+.visit-mini.done{border-style:solid;border-color:var(--green);background:var(--green-l)}
+.visit-mini.done .acts{display:none}
+
+/* week */
+.weekwrap{flex:1;min-height:0;display:grid;grid-template-columns:1fr 300px}
+.kpirow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:18px 24px 0}
+.kpi{background:var(--white);border-radius:14px;padding:12px 14px}
+.kpi small{font-size:11.5px;color:var(--muted);display:block}
+.kpi b{font-size:24px;letter-spacing:-.5px;display:block;margin-top:2px}
+.kpi i{font-style:normal;font-size:11px;font-weight:700;color:var(--green-d)}
+.week{margin:14px 24px 18px;background:var(--white);border-radius:16px;display:grid;grid-template-columns:48px repeat(6,1fr);overflow:hidden;min-height:0}
+.wh{grid-row:1;padding:10px 8px;text-align:center;border-bottom:1px solid var(--line);font-size:11px;color:var(--muted)}
+.wh b{display:block;font-size:17px;color:var(--navy);letter-spacing:-.3px}
+.wh.today b{color:#fff;background:var(--green);border-radius:9px;width:32px;margin:2px auto 0;line-height:28px}
+.hours{grid-row:2;position:relative}
+.hours span{position:absolute;right:8px;font-size:10px;color:var(--muted);transform:translateY(-6px)}
+.col{grid-row:2;position:relative;border-left:1px solid var(--line);height:540px;background:repeating-linear-gradient(to bottom,transparent 0 53px,var(--line) 53px 54px)}
+.e.one{white-space:nowrap;text-overflow:ellipsis;padding:4px 7px}
+.e.one small{display:inline;margin-left:4px}
+.e{position:absolute;left:4px;right:4px;border-radius:8px;padding:5px 7px;font-size:10.5px;font-weight:700;line-height:1.25;overflow:hidden}
+.e small{display:block;font-weight:600;opacity:.8}
+.e.c{background:var(--navy-l);color:var(--navy)}
+.e.p{background:repeating-linear-gradient(135deg,var(--orange-l),var(--orange-l) 6px,#FFE7CF 6px,#FFE7CF 12px);border:1.5px dashed var(--orange);color:var(--orange-d)}
+.e.g{background:var(--green);color:#fff}
+.e.x{background:#F4F4F6;color:#A9A7B8;font-weight:600}
+.now{position:absolute;left:0;right:0;height:2px;background:var(--orange);z-index:2}
+.now::before{content:"";position:absolute;left:-4px;top:-3px;width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.todo{border-left:1px solid var(--line);background:var(--white);padding:18px}
+.todo h3{font-size:15px;margin-bottom:12px}
+.tcard{border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px}
+.tcard .row{margin-bottom:8px}
+.tcard b{font-size:13px;display:block}
+.tcard small{font-size:11.5px;color:var(--muted)}
+.tcard .acts{display:flex;gap:6px;margin-top:10px}
+.tcard .acts button{flex:1;padding:8px;border-radius:10px;font-weight:700;font-size:12px}
+.legend{display:flex;flex-direction:column;gap:8px;margin-top:18px;font-size:11.5px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:8px}
+.legend i{width:14px;height:14px;border-radius:4px}
+.dcap{max-width:640px;margin-top:20px}
+.dcap h2{font-size:18px;letter-spacing:-.2px}
+.dcap p{font-size:14px;color:var(--muted);margin-top:4px}
+@media (max-width:640px){.desk,.switch{padding-left:16px;padding-right:16px}.chrome .url{font-size:10px}}
+
+
+/* ---------- Hero actions ---------- */
+.acts-hero{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.btn-play{display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:#fff;font-weight:700;font-size:15px;padding:14px 22px;border-radius:14px}
+.btn-play:hover{background:var(--orange-d)}
+.btn-line{display:inline-flex;align-items:center;gap:8px;background:var(--white);color:var(--navy);font-weight:700;font-size:15px;padding:14px 20px;border-radius:14px;text-decoration:none;box-shadow:0 0 0 1px var(--line)}
+
+/* ---------- Story ---------- */
+.story{max-width:1400px;margin:0 auto;padding:40px 32px 24px;display:flex;flex-direction:column;gap:28px}
+.sec-t{max-width:1400px;margin:0 auto;padding:56px 32px 0}
+.sec-t h2{font-size:clamp(26px,3vw,38px);letter-spacing:-1px;line-height:1.1}
+.sec-t p{font-size:16px;color:var(--muted);margin-top:8px;max-width:60ch}
+.scene{position:relative;border-radius:32px;padding:48px;display:grid;grid-template-columns:300px minmax(0,1fr);gap:44px;align-items:center;background:var(--white);overflow:hidden;min-height:740px}
+.scene.night{background:radial-gradient(120% 90% at 85% 10%,#57527D 0%,#3C3956 45%,#2A283E 100%);color:#fff}
+.scene.night::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;background-image:radial-gradient(1.5px 1.5px at 12% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 28% 8%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 44% 22%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 63% 6%,#fff 50%,transparent 51%),radial-gradient(1.2px 1.2px at 78% 26%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 91% 14%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 8% 60%,#fff 50%,transparent 51%)}
+.scene.night .moon{position:absolute;top:44px;right:56px;width:54px;height:54px;border-radius:50%;background:#FFF4D6;box-shadow:0 0 60px 10px rgba(255,236,190,.35);opacity:.9}
+.scene.night .moon::after{content:"";position:absolute;top:-6px;left:14px;width:54px;height:54px;border-radius:50%;background:#4A466B}
+.scene.dusk{background:linear-gradient(160deg,#F7F6FA,#ECEBF2)}
+.scene.morning{background:linear-gradient(165deg,#FFF3E4 0%,#FFF9F2 45%,#F4F9EE 100%)}
+.stxt{position:relative;z-index:1}
+.stxt .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;margin-bottom:18px}
+.night .stxt .n{background:#fff;color:var(--navy)}
+.stxt .time{font-size:72px;font-weight:700;letter-spacing:-3px;line-height:.95;font-variant-numeric:tabular-nums}
+.stxt .when{display:block;font-size:14px;font-weight:600;color:var(--muted);margin-top:8px}
+.night .stxt .when{color:rgba(255,255,255,.65)}
+.stxt h3{font-size:25px;letter-spacing:-.5px;line-height:1.15;margin-top:22px}
+.stxt p{font-size:15.5px;color:var(--muted);margin-top:10px;max-width:32ch}
+.night .stxt p{color:rgba(255,255,255,.72)}
+.replay{margin-top:22px;display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;padding:8px 14px;border-radius:10px;background:rgba(60,57,86,.07)}
+.night .replay{background:rgba(255,255,255,.12);color:#fff}
+.sstage{position:relative;z-index:1;display:flex;gap:28px;justify-content:center;align-items:center;flex-wrap:wrap;min-width:0}
+.sstage .wide{flex:1;min-width:0;max-width:880px}
+
+/* web page on phone (scene 1) */
+.web{flex:1;overflow:hidden;display:flex;flex-direction:column;background:#fff;position:relative}
+.web-h{display:flex;justify-content:space-between;align-items:center;padding:6px 16px 10px}
+.web-h img{height:22px}
+.web-url{margin:0 12px 8px;background:var(--mist);border-radius:10px;font-size:11px;color:var(--muted);text-align:center;padding:6px}
+.web-photo{height:118px;flex:none;position:relative}
+.web-photo svg{width:100%;height:100%;display:block}
+.web-photo .pill{position:absolute;top:10px;left:12px;background:#fff;color:var(--navy)}
+.web-info{padding:10px 16px 6px}
+.web-info h4{font-size:15px;letter-spacing:-.2px}
+.web-info p{font-size:11.5px;color:var(--muted)}
+.web-info .pr{font-size:19px;font-weight:800;margin-top:4px}
+.wform{margin:2px 12px 0;background:var(--mist);border-radius:18px;padding:12px;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.wform h5{font-size:13.5px;margin-bottom:8px}
+.wf{background:#fff;border-radius:10px;padding:6px 10px;margin-bottom:6px;min-height:34px}
+.wf small{display:block;font-size:9.5px;color:var(--muted)}
+.wf span{font-size:12px;font-weight:600;min-height:15px;display:block}
+.wf.msg span{font-weight:500;line-height:1.3;min-height:30px}
+.wf.on{box-shadow:0 0 0 2px var(--orange)}
+.caret::after{content:"";display:inline-block;width:1.5px;height:12px;background:var(--orange);margin-left:1px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.wcheck{display:flex;gap:7px;align-items:flex-start;font-size:10px;color:var(--muted);margin:4px 2px 8px;line-height:1.3}
+.wcheck i{width:14px;height:14px;border-radius:4px;border:1.5px solid #C9C7D4;flex:none;display:grid;place-items:center;background:#fff}
+.wcheck.on i{background:var(--green);border-color:var(--green)}
+.wbtn{display:block;width:100%;background:var(--orange);color:#fff;font-weight:700;border-radius:12px;padding:10px;font-size:13px;text-align:center;transition:transform .15s}
+.wbtn.press{transform:scale(.96);background:var(--orange-d)}
+.sent{position:absolute;inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;opacity:0;pointer-events:none;transition:opacity .4s}
+.sent.on{opacity:1}
+.sent .ck{width:64px;height:64px;border-radius:50%;background:var(--green-l);display:grid;place-items:center;margin-bottom:16px;transform:scale(.6);transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.sent.on .ck{transform:scale(1)}
+.sent h4{font-size:18px}
+.sent p{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.4}
+
+/* scene 2 assistant panel */
+.qpanel{position:absolute;right:28px;top:90px;width:360px;background:var(--navy);color:#fff;border-radius:22px;padding:22px;box-shadow:0 40px 60px -20px rgba(42,40,62,.6)}
+.qpanel .hd{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px}
+.qpanel .hd .live{margin-left:auto;color:#B8E28C}
+.chrono{display:flex;align-items:center;gap:16px;margin:18px 0 16px}
+.ring{width:62px;height:62px;flex:none}
+.ring circle{fill:none;stroke-width:6}
+.chrono b{font-size:50px;letter-spacing:-1.5px;font-variant-numeric:tabular-nums;line-height:1}
+.chrono small{display:block;font-size:12px;opacity:.65;margin-top:4px}
+.qsteps li{list-style:none;display:flex;align-items:center;gap:11px;padding:9px 0;border-top:1px solid rgba(255,255,255,.1);font-size:13.5px;opacity:.35;transition:opacity .3s}
+.qsteps li.on{opacity:1}
+.qsteps li i{width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,.35);flex:none;display:grid;place-items:center}
+.qsteps li.on i{background:var(--green);border-color:var(--green)}
+.qsteps li small{display:block;font-size:11px;opacity:.6}
+.qsteps li em{margin-left:auto;font-style:normal;font-size:12px;font-variant-numeric:tabular-nums;opacity:.7}
+.qdone{margin-top:14px;background:var(--green);border-radius:14px;padding:12px;text-align:center;font-weight:700;font-size:14px;opacity:0;transform:translateY(8px);transition:all .4s}
+.qdone.on{opacity:1;transform:none}
+.inbox .lead.newin{opacity:0;transform:translateY(-14px);transition:all .5s cubic-bezier(.2,.8,.2,1)}
+.inbox .lead.newin.on{opacity:1;transform:none}
+.toast{position:absolute;top:84px;left:50%;transform:translate(-50%,-20px);background:var(--white);border-radius:14px;padding:10px 16px;box-shadow:0 20px 40px -12px rgba(60,57,86,.35);display:flex;align-items:center;gap:10px;font-size:13px;opacity:0;transition:all .4s;z-index:5}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* scene 3/4 fiche panel */
+.fiche{width:380px;max-width:100%;background:var(--white);border-radius:24px;padding:20px;box-shadow:0 30px 60px -30px rgba(60,57,86,.4)}
+.fiche .top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.fiche .top h4{font-size:18px;letter-spacing:-.3px}
+.fiche .top p{font-size:12px;color:var(--muted)}
+.fiche .top .gauge{margin-left:auto}
+.fiche .lst{display:flex;gap:10px;align-items:center;background:var(--mist);border-radius:14px;padding:8px;margin-bottom:12px}
+.fiche .lst .ph{width:58px;height:48px}
+.fiche .lst b{display:block;font-size:12.5px}.fiche .lst small{font-size:11px;color:var(--muted)}
+.frow{display:flex;gap:11px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);transition:background .4s}
+.frow .ic{width:30px;height:30px;border-radius:9px;background:var(--mist);display:grid;place-items:center;flex:none;transition:background .3s}
+.frow small{display:block;font-size:10.5px;color:var(--muted)}
+.frow b{display:block;font-size:13px;font-weight:700;min-height:17px;color:#C9C7D4;transition:color .3s}
+.frow .st{margin-left:auto;align-self:center}
+.frow.on .ic{background:var(--green-l)}
+.frow.on b{color:var(--navy)}
+.frow.flash{background:linear-gradient(90deg,var(--green-l),transparent 80%)}
+.frow.on.orange .ic{background:var(--orange-l)}
+.frow.on.orange b{color:var(--orange-d)}
+.frow .ok{transform:scale(0);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.frow.on .ok{transform:scale(1)}
+.frow.on.orange .ok{background:var(--orange)}
+.fbar{height:6px;border-radius:3px;background:var(--mist);overflow:hidden;margin:2px 0 4px}
+.fbar i{display:block;height:100%;width:0;background:var(--green);transition:width .8s cubic-bezier(.2,.8,.2,1)}
+
+/* mail thread on phone */
+.mthread{flex:1;min-height:0;overflow:auto;scrollbar-width:none;padding:10px 0;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.mthread::-webkit-scrollbar{display:none}
+.mthread .m{opacity:0;transform:translateY(8px);transition:all .35s}
+.mthread .m.on{opacity:1;transform:none}
+.mhead{display:flex;align-items:center;gap:9px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+.mhead b{font-size:13px;display:block}.mhead small{font-size:10.5px;color:var(--muted)}
+.typing{align-self:flex-start;background:var(--white);border-radius:14px;padding:9px 12px;display:none;gap:4px}
+.typing.on{display:flex}
+.typing i{width:6px;height:6px;border-radius:50%;background:#C9C7D4;animation:dot 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{40%{transform:translateY(-3px);background:var(--muted)}}
+.slots span{cursor:default;transition:all .25s}
+.slots span.tap{transform:scale(.96)}
+
+/* booking sheet */
+.sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:24px 24px 0 0;padding:16px 16px 26px;box-shadow:0 -20px 40px -10px rgba(60,57,86,.3);transform:translateY(105%);transition:transform .45s cubic-bezier(.2,.8,.2,1);z-index:6}
+.sheet.on{transform:none}
+.sheet .grab{width:36px;height:4px;border-radius:2px;background:var(--line);margin:0 auto 12px}
+.sheet h5{font-size:15px}
+.sheet p{font-size:11.5px;color:var(--muted);margin:2px 0 10px}
+.times{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.times span{border:1.5px solid var(--line);border-radius:12px;padding:10px;text-align:center;transition:all .25s}
+.times span small{display:block;font-size:10.5px;color:var(--muted)}
+.times span b{font-size:20px;letter-spacing:-.4px}
+.times span.sel{border-color:var(--green);background:var(--green-l)}
+.times span.sel b{color:var(--green-d)}
+.sheet .wbtn{background:var(--green)}
+.sheet .wbtn.press{background:var(--green-d)}
+
+/* mini agenda card */
+.gcal{width:250px;background:var(--white);border-radius:20px;padding:14px;box-shadow:0 30px 60px -30px rgba(60,57,86,.4)}
+.gcal .hd{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-bottom:8px}
+.gcal .hd b{font-size:13px}
+.gslot{display:grid;grid-template-columns:36px 1fr;gap:8px;min-height:34px}
+.gslot time{font-size:10.5px;color:var(--muted);padding-top:3px}
+.gslot div{border-top:1px solid var(--line);padding:3px 0}
+.gcal .ev{transform:scale(.9);opacity:0;transition:all .45s cubic-bezier(.3,1.5,.5,1)}
+.gcal .ev.on{transform:none;opacity:1}
+.gcal .ev.busy{opacity:1;transform:none}
+
+/* lock screen */
+.lock{position:absolute;inset:0;background:linear-gradient(170deg,#FFB873 0%,#FF9F43 30%,#8C7FC4 75%,#3C3956 100%);display:flex;flex-direction:column;align-items:center;padding-top:62px;color:#fff;transition:opacity .5s;z-index:4}
+.lock.off{opacity:0;pointer-events:none}
+.lock small{font-size:13px;font-weight:600;opacity:.9}
+.lock b{font-size:66px;font-weight:700;letter-spacing:-2px;line-height:1}
+.notif{width:calc(100% - 20px);background:rgba(255,255,255,.82);backdrop-filter:blur(10px);color:var(--navy);border-radius:18px;padding:10px 12px;margin-top:8px;display:flex;gap:10px;opacity:0;transform:translateY(-10px);transition:all .45s}
+.notif:first-of-type{margin-top:auto}
+.notif.on{opacity:1;transform:none}
+.notif .ap{width:30px;height:30px;border-radius:8px;background:var(--green);display:grid;place-items:center;flex:none;color:#fff;font-weight:800;font-size:14px}
+.notif b{font-size:12px;display:flex;justify-content:space-between}
+.notif b span{font-weight:500;color:var(--muted);font-size:10.5px}
+.notif p{font-size:11.5px;line-height:1.3}
+.lock .spacer{height:110px}
+.inmail{position:absolute;inset:44px 0 0;background:var(--mist);padding:0 16px;transform:translateX(100%);transition:transform .5s cubic-bezier(.2,.8,.2,1);z-index:3;overflow:hidden}
+.inmail.on{transform:none}
+.cmail{background:#fff;border-radius:18px;padding:14px;margin-top:10px}
+.cmail .ck{width:44px;height:44px;border-radius:50%;background:var(--green-l);display:grid;place-items:center;margin-bottom:10px}
+.cmail h4{font-size:16px;letter-spacing:-.3px}
+.cmail .rowi{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line);font-size:12px}
+.cmail .rowi:first-of-type{border-top:0}
+.cmail .rowi small{display:block;color:var(--muted);font-size:10.5px}
+.cmail .b2{display:flex;gap:6px;margin-top:10px}
+.cmail .b2 span{flex:1;text-align:center;border-radius:11px;padding:9px 6px;font-weight:700;font-size:11.5px}
+
+/* Annonces table */
+.atable{flex:1;min-height:0;margin:16px 24px 18px;background:var(--white);border-radius:16px;overflow:hidden}
+.arow{display:grid;grid-template-columns:2.4fr .9fr 1fr 1fr 1.1fr 40px;gap:12px;align-items:center;padding:10px 16px;border-top:1px solid var(--line);font-size:12.5px}
+.arow.h{border-top:0;font-size:11.5px;color:var(--muted);font-weight:600;background:#FAFAFB}
+.arow .t{display:flex;align-items:center;gap:10px;min-width:0}
+.arow .t img,.arow .t .phs{width:52px;height:40px;border-radius:8px;object-fit:cover;flex:none;background:linear-gradient(135deg,#d7dccf,#b6c0a8)}
+.arow .t b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.arow .t small{color:var(--muted);font-size:11px}
+.arow.sel{background:var(--orange-l)}
+.istat{display:flex;gap:10px;padding:16px 24px 0}
+.istat div{background:var(--white);border-radius:14px;padding:12px 14px;flex:1}
+.istat small{font-size:11.5px;color:var(--muted);display:block}
+.istat b{font-size:19px;letter-spacing:-.3px}
+.drawer{border-left:1px solid var(--line);background:var(--white);padding:18px}
+.drawer h3{font-size:15px;margin-bottom:10px}
+.drawer .big-ph{height:150px;border-radius:14px;object-fit:cover;width:100%;background:linear-gradient(135deg,#d7dccf,#b6c0a8)}
+.conflict{background:var(--orange-l);border-radius:14px;padding:12px;margin:12px 0;font-size:12px}
+.conflict b{display:block;margin-bottom:4px}
+.choice{display:flex;gap:8px;margin-top:10px}
+.choice button{flex:1;background:#fff;border:1px solid #F3D3B4;border-radius:10px;padding:8px;font-weight:700;font-size:12px}
+.fields li{list-style:none;display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid var(--line);font-size:12px}
+.fields li span{color:var(--muted)}
+
+@media (max-width:1100px){.scene{grid-template-columns:1fr;padding:32px;gap:28px;min-height:0}.stxt .time{font-size:56px}.qpanel{position:relative;right:auto;top:auto;width:auto;margin:16px}}
+@media (max-width:640px){.story,.sec-t{padding-left:16px;padding-right:16px}.scene{padding:22px 16px;border-radius:24px}.fiche,.gcal{width:100%}}
+
+
+/* booking web page (opened from email link) */
+.webov{position:absolute;left:0;right:0;top:44px;bottom:0;background:#fff;z-index:6;transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+.webov.on{transform:none}
+.sbar{display:flex;align-items:center;gap:8px;padding:4px 12px 8px;border-bottom:1px solid var(--line)}
+.sbar .done{font-size:12px;color:#0A84FF;font-weight:600}
+.sbar .addr{flex:1;background:var(--mist);border-radius:9px;font-size:11px;color:var(--navy);text-align:center;padding:6px;display:flex;align-items:center;justify-content:center;gap:5px}
+.bk-page{flex:1;padding:12px 16px;display:flex;flex-direction:column;position:relative}
+.bk-page img.lg{height:20px;align-self:flex-start;margin-bottom:10px}
+.bk-page h5{font-size:17px;letter-spacing:-.3px}
+.bk-page .sub{font-size:11.5px;color:var(--muted);margin:2px 0 12px}
+.bk-list{display:flex;gap:9px;align-items:center;background:var(--mist);border-radius:13px;padding:7px;margin-bottom:12px}
+.bk-list .ph{width:52px;height:42px;overflow:hidden;border-radius:9px}
+.bk-list b{display:block;font-size:12px}.bk-list small{font-size:10.5px;color:var(--muted)}
+.bk-page .lbl{font-size:11px;color:var(--muted);margin-bottom:6px}
+.bk-page .note{font-size:10.5px;color:var(--muted);margin-top:10px;line-height:1.35}
+.bk-page .wbtn{background:var(--green);margin-top:auto}
+.bk-page .wbtn.press{background:var(--green-d)}
+.bk-ok{position:absolute;inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .35s}
+.bk-ok.on{opacity:1}
+.bk-ok .ck{width:58px;height:58px;border-radius:50%;background:var(--green-l);display:grid;place-items:center;margin-bottom:14px}
+.bk-ok h5{font-size:17px}
+.bk-ok p{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.4}
+.bk-ok .pill{margin-top:12px}
+
+
+/* ---------- Convaincre ---------- */
+.why{max-width:1400px;margin:0 auto;padding:8px 32px 64px;display:flex;flex-direction:column;gap:28px}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.bcol{border-radius:28px;padding:30px}
+.bcol.before{background:var(--white)}
+.bcol.after{background:var(--navy);color:#fff}
+.bcol h3{font-size:20px;letter-spacing:-.3px}
+.bcol .lead-in{font-size:14px;color:var(--muted);margin:4px 0 20px}
+.bcol.after .lead-in{color:rgba(255,255,255,.65)}
+.tline li{list-style:none;display:grid;grid-template-columns:118px 16px 1fr;gap:12px;padding-bottom:18px;position:relative}
+.tline li:last-child{padding-bottom:0}
+.tline time{font-weight:700;font-size:15px;font-variant-numeric:tabular-nums}
+.tline i{width:12px;height:12px;border-radius:50%;margin-top:4px;background:var(--line);position:relative}
+.tline li:not(:last-child) i::after{content:"";position:absolute;left:5px;top:14px;width:2px;height:calc(100% + 18px);background:var(--line)}
+.after .tline i{background:var(--green)}
+.after .tline li:not(:last-child) i::after{background:rgba(133,196,65,.4)}
+.before .tline li.bad i{background:var(--orange)}
+.tline b{display:block;font-size:14.5px}
+.tline span{font-size:13px;color:var(--muted)}
+.after .tline span{color:rgba(255,255,255,.65)}
+.never{background:var(--white);border-radius:28px;padding:30px;display:grid;grid-template-columns:280px 1fr;gap:32px}
+.never h3{font-size:24px;letter-spacing:-.5px;line-height:1.15}
+.never>div>p{font-size:14px;color:var(--muted);margin-top:8px}
+.nlist{display:grid;grid-template-columns:1fr 1fr;gap:4px 28px}
+.nlist li{list-style:none;display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.nlist li .x{width:26px;height:26px;border-radius:8px;background:var(--orange-l);display:grid;place-items:center;flex:none}
+.nlist b{display:block;font-size:14px}
+.nlist span{font-size:12.5px;color:var(--muted)}
+.calc{background:var(--white);border-radius:28px;padding:30px;display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.calc h3{font-size:24px;letter-spacing:-.5px;line-height:1.15}
+.calc .intro-c{font-size:14px;color:var(--muted);margin:8px 0 18px}
+.cin{display:grid;grid-template-columns:1fr 130px;gap:10px 16px;align-items:center}
+.cin label{font-size:13.5px}
+.cin label small{display:block;font-size:11.5px;color:var(--muted)}
+.cin .inp{display:flex;align-items:center;background:var(--mist);border-radius:12px;padding:0 12px;height:44px}
+.cin input{width:100%;border:0;background:transparent;font:inherit;font-weight:700;font-size:16px;color:var(--navy);text-align:right;-moz-appearance:textfield}
+.cin input::-webkit-outer-spin-button,.cin input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.cin .u{font-size:13px;color:var(--muted);margin-left:6px}
+.cin .hyp{grid-column:1/-1;border-top:1px dashed var(--line);margin-top:6px}
+.cout{background:var(--mist);border-radius:22px;padding:24px;display:flex;flex-direction:column}
+.cline{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid #E2E1E9;font-size:14px}
+.cline b{font-size:20px;letter-spacing:-.3px;font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:12px}
+.cbig{margin-top:18px;background:var(--green);color:#fff;border-radius:18px;padding:18px 20px}
+.cbig small{font-size:13px;opacity:.9}
+.cbig b{display:block;font-size:40px;letter-spacing:-1px;line-height:1.05;font-variant-numeric:tabular-nums}
+.cbig span{font-size:13px;opacity:.9}
+.cout .disc{font-size:11.5px;color:var(--muted);margin-top:12px;line-height:1.4}
+.pilot{background:linear-gradient(140deg,#3C3956,#2E2C45);color:#fff;border-radius:28px;padding:36px;display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:center}
+.pilot h3{font-size:30px;letter-spacing:-.8px;line-height:1.1}
+.pilot p{color:rgba(255,255,255,.7);font-size:15px;margin-top:10px;max-width:44ch}
+.psteps li{list-style:none;display:flex;gap:14px;padding:12px 0;border-top:1px solid rgba(255,255,255,.12)}
+.psteps li:first-child{border-top:0}
+.psteps .k{width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;font-size:13px;display:grid;place-items:center;flex:none}
+.psteps b{display:block;font-size:15px}
+.psteps span{font-size:13px;color:rgba(255,255,255,.65)}
+@media (max-width:980px){.ba,.never,.calc,.pilot{grid-template-columns:1fr}.nlist{grid-template-columns:1fr}}
+@media (max-width:640px){.why{padding-left:16px;padding-right:16px}.bcol,.never,.calc,.pilot{padding:22px;border-radius:22px}.cin{grid-template-columns:1fr 110px}.cbig b{font-size:32px}.cline{font-size:13px}.cline b{font-size:16px}.tline li{grid-template-columns:92px 14px 1fr}}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1660px){.flow{column-gap:48px}}
+@media (max-width:980px){
+  .intro{grid-template-columns:1fr;gap:28px;padding-top:40px}
+}
+@media (max-width:640px){
+  .page-head-in,.intro,.flow,.foot{padding-left:16px;padding-right:16px}
+  .brand-logo{height:36px}
+  .page-head .tag{display:none}
+  .phone{height:auto;aspect-ratio:300/640}
+  .clock{padding:16px}
+  .clock strong{font-size:22px}
+  .clock div+div{padding-left:14px;margin-left:14px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .lead.fresh{animation:arrive .7s .4s both cubic-bezier(.2,.8,.2,1)}
+  @keyframes arrive{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+  .gauge .fill{transition:height 1s cubic-bezier(.2,.8,.2,1),y 1s cubic-bezier(.2,.8,.2,1)}
+}
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <div class="page-head-in">
+    <img class="brand-logo" src="https://www.bonapart.fr/img/logo.png" alt="Bonapart immobilier" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="brand-fallback">BonApart.fr</span>
+    <span class="tag">Maquette de proposition, non officielle</span>
+  </div>
+</header>
+
+<section class="intro">
+  <div>
+    <h1>De la demande à la visite, pendant que l'agence est fermée.</h1>
+    <p>L'assistant IA répond aux candidats et aux acquéreurs, les qualifie et pose la visite dans votre Google Agenda. Vous validez d'un geste depuis votre iPhone.</p>
+    <div class="acts-hero"><button class="btn-play" id="playAll"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg>Lancer la démo</button><a class="btn-line" href="#ecrans">Voir les écrans</a></div>
+  </div>
+  <div class="clock" aria-label="Exemple de demande traitée un soir">
+    <div><small>Demande reçue</small><strong>21:47:02</strong></div>
+    <div><small>Premier email</small><strong>21:47:49</strong></div>
+    <div class="hl"><small>Temps de réponse</small><strong>47 s</strong></div>
+  </div>
+</section>
+
+<div class="sec-t" id="demo"><h2>Le parcours, comme dans la vraie vie</h2><p>Une demande d'achat un mardi soir, de l'envoi du formulaire à la visite confirmée le lendemain matin. Chaque scène se joue quand elle apparaît à l'écran.</p></div>
+<div class="story"><section class="scene night" id="sc1" data-scene="1"><span class="moon"></span>
+<div class="stxt"><span class="n">1</span><div class="time">21:47</div><span class="when">Mardi soir, l'agence est fermée</span>
+<h3>Thomas découvre l'annonce depuis son canapé</h3><p>Il remplit le formulaire de contact de l'annonce sur bonapart.fr et l'envoie.</p><button class="replay" data-replay="1"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Rejouer</button></div>
+<div class="sstage"><div class="phone"><div class="screen"><div class="island"></div><div class="status"><span>21:47</span><span class="sig"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="currentColor"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="currentColor"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="currentColor"/></svg><svg width="24" height="11" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/><rect x="21.5" y="3.5" width="1.5" height="4" rx=".7" fill="currentColor" opacity=".4"/></svg></span></div><div class="web" id="s1web">
+<div class="web-h"><img src="https://www.bonapart.fr/img/logo.png" alt="Bonapart" onerror="this.outerHTML='<b style=&quot;color:#85C441;font-size:17px&quot;>BonApart</b>'"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3C3956" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></div>
+<div id="s1scroll" style="transition:transform .7s cubic-bezier(.2,.8,.2,1)">
+<div class="web-photo"><svg viewBox="0 0 300 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="wl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6F1E8"/><stop offset="1" stop-color="#E9E1D3"/></linearGradient><linearGradient id="fl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C79B6A"/><stop offset="1" stop-color="#B0855A"/></linearGradient><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFD9EE"/><stop offset="1" stop-color="#EAF2F7"/></linearGradient></defs><rect width="300" height="150" fill="url(#wl)"/><rect y="112" width="300" height="38" fill="url(#fl)"/><g stroke="#A27A50" stroke-width=".6" opacity=".5"><path d="M0 120h300M0 130h300M0 141h300"/></g><rect x="170" y="18" width="70" height="94" fill="url(#sky)" stroke="#fff" stroke-width="5"/><path d="M205 18v94M170 60h70" stroke="#fff" stroke-width="3"/><rect x="34" y="78" width="96" height="30" rx="8" fill="#85C441" opacity=".85"/><rect x="40" y="66" width="84" height="18" rx="6" fill="#9ED15E" opacity=".9"/><rect x="40" y="106" width="5" height="8" fill="#6B5A47"/><rect x="119" y="106" width="5" height="8" fill="#6B5A47"/><circle cx="262" cy="96" r="10" fill="#6AA62E" opacity=".7"/><rect x="258" y="100" width="8" height="12" fill="#C4703A"/><rect x="60" y="30" width="44" height="30" fill="#fff" stroke="#E0D6C4" stroke-width="2"/><path d="M64 55l12-12 9 8 6-5 9 9" fill="none" stroke="#FF9F43" stroke-width="2"/></svg><span class="pill">Vente</span></div>
+<div class="web-info"><h4>Appartement 3 pièces, 64 m²</h4><p>Paris 15e (75015), 2e étage avec ascenseur</p><div class="pr">489 000 €</div></div>
+<div class="wform"><h5>Contacter l'agence</h5>
+<div class="wf" data-f="1"><small>Nom</small><span></span></div>
+<div class="wf" data-f="2"><small>Email</small><span></span></div>
+<div class="wf" data-f="3"><small>Téléphone</small><span></span></div>
+<div class="wf msg" data-f="4"><small>Message</small><span></span></div>
+<div class="wcheck" id="s1chk"><i><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i>J'accepte d'être recontacté par l'assistant IA de Bonapart au sujet de cette annonce.</div>
+<span class="wbtn" id="s1btn">Envoyer ma demande</span></div></div>
+<div class="sent" id="s1sent"><div class="ck"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#6AA62E" stroke-width="3" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></div><h4>Demande envoyée</h4><p>L'assistant de Bonapart vous répond par email dans quelques instants.</p></div>
+</div><span class="home"></span></div></div></div></section><section class="scene dusk" id="sc2" data-scene="2">
+<div class="stxt"><span class="n">2</span><div class="time">21:47</div><span class="when">Quelques secondes plus tard</span>
+<h3>L'assistant prend la demande en charge</h3><p>Il identifie l'annonce, crée la fiche de Thomas et lui répond par email en moins d'une minute.</p><button class="replay" data-replay="2"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Rejouer</button></div>
+<div class="sstage"><div class="wide"><div class="win"><div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="url"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>visites.bonapart.fr/demandes</span><span style="width:47px"></span></div><div class="stage" data-w="1280" data-h="720"><div class="app" style="height:720px"><aside class="side"><img src="https://www.bonapart.fr/img/logo.png" alt="Bonapart" onerror="this.outerHTML='<b style=&quot;color:#85C441;font-size:22px;margin:0 6px 20px&quot;>BonApart</b>'"><div class="agency"><div>Paris 15e<small>92 rue de la Convention</small></div><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#817F96" stroke-width="3" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></div>
+<nav class="navl"><a href="#" class="on"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"/></svg>Demandes<span class="">9</span></a><a href="#" class=""><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>Visites<span class="hot">1</span></a><a href="#" class=""><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Annonces<span class="">255</span></a><a href="#"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Résultats</a><a href="#"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>Réglages</a></nav>
+<div class="bot"><div class="aistate"><span class="live">Assistant actif</span><p>Temps de réponse moyen cette semaine</p><b>52 s</b></div><div class="me"><span class="av g">M</span><div><b>Marc</b><small>Agent, Paris 15e</small></div></div></div></aside>
+<div class="mainc"><div class="topb"><h1>Demandes</h1><div class="search"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Rechercher un prospect, une annonce</div><span class="bell"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#3C3956" stroke-width="2" stroke-linecap="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M10.3 20a1.9 1.9 0 0 0 3.4 0"/></svg><i></i></span></div>
+<div style="flex:1;min-height:0;position:relative;display:grid;grid-template-columns:400px 1fr">
+<section class="pane inbox"><div class="seg"><button class="on">Toutes</button><button>Location</button><button>Vente</button></div><div class="scroll"><div class="lead newin sel" id="s2lead"><span class="av g">TM</span><div class="mid"><div class="nm"><em>Thomas Martin</em> <span>21:47</span></div><div class="ad">3 pièces 64 m², Paris 15e</div><div class="meta"><span class="pill p-new">Nouvelle</span><span class="type">Vente</span></div></div><span class="gauge" data-score="0" data-size="34"></span></div><div class="lead"><span class="av ">AL</span><div class="mid"><div class="nm"><em>Anaïs Leroy</em> <span>21:12</span></div><div class="ad">Studio 25 m², Asnières</div><div class="meta"><span class="pill p-qual">En qualification</span><span class="type">Location</span></div></div><span class="gauge" data-score="40" data-size="34"></span></div><div class="lead"><span class="av o">MG</span><div class="mid"><div class="nm"><em>Mehdi Garnier</em> <span>20:40</span></div><div class="ad">2 pièces 52 m², Ivry-sur-Seine</div><div class="meta"><span class="pill p-ok">Qualifiée</span><span class="type">Location</span></div></div><span class="gauge" data-score="100" data-size="34"></span></div><div class="lead"><span class="av ">CB</span><div class="mid"><div class="nm"><em>Claire Bonnet</em> <span>19:55</span></div><div class="ad">Appartement 4 pièces, Paris 15e</div><div class="meta"><span class="pill p-visit">Visite à valider</span><span class="type">Vente</span></div></div><span class="gauge" data-score="80" data-size="34"></span></div></div></section>
+<div style="position:relative;background:#F6F6F8">
+<div class="toast" id="s2toast"><span class="av g" style="width:28px;height:28px;font-size:11px">TM</span><div><b>Nouvelle demande</b><div class="muted" style="font-size:11.5px">Thomas Martin, 3 pièces Paris 15e</div></div></div>
+<div class="qpanel"><div class="hd"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg> Assistant de qualification<span class="live">En cours</span></div>
+<div class="chrono"><svg class="ring" viewBox="0 0 62 62"><circle cx="31" cy="31" r="26" stroke="rgba(255,255,255,.15)"/><circle id="s2ring" cx="31" cy="31" r="26" stroke="#85C441" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="163.4" transform="rotate(-90 31 31)"/></svg><div><b id="s2clock">00:00</b><small>depuis la réception de la demande</small></div></div>
+<ul class="qsteps"><li data-q="1"><i><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i><div>Demande reçue<small>Formulaire bonapart.fr</small></div><em>+2 s</em></li><li data-q="2"><i><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i><div>Annonce et acquéreur identifiés<small>Réf. 3 pièces Paris 15e, Thomas Martin</small></div><em>+4 s</em></li><li data-q="3"><i><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i><div>Fiche acquéreur créée<small>Agence Paris 15e, agent Marc</small></div><em>+5 s</em></li><li data-q="4"><i><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i><div>Premier email envoyé<small>Présentation IA et première question</small></div><em>+47 s</em></li></ul>
+<div class="qdone" id="s2done">Réponse envoyée en 47 secondes</div></div>
+</div></div></div></div></div></div></div></div></section><section class="scene" id="sc3" data-scene="3">
+<div class="stxt"><span class="n">3</span><div class="time">21:49</div><span class="when">Pendant l'échange</span>
+<h3>Thomas répond, la fiche se remplit en direct</h3><p>Projet, financement, bien à vendre, disponibilités : chaque réponse coche un critère et fait monter la jauge.</p><button class="replay" data-replay="3"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Rejouer</button></div>
+<div class="sstage"><div class="phone"><div class="screen"><div class="island"></div><div class="status"><span>21:52</span><span class="sig"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="currentColor"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="currentColor"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="currentColor"/></svg><svg width="24" height="11" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/><rect x="21.5" y="3.5" width="1.5" height="4" rx=".7" fill="currentColor" opacity=".4"/></svg></span></div><div class="body"><div class="mhead"><span class="av g" style="background:var(--green);color:#fff">B</span><div><b>Assistant Bonapart</b><small>Appartement 3 pièces, Paris 15e</small></div></div><div class="mthread" id="s3thread"><span class="day">Ce soir</span><div class="m ai"><span class="by"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>Assistant IA Bonapart</span>Bonjour Thomas, je suis l'assistant IA de Bonapart. Merci pour votre intérêt pour l'appartement 3 pièces de 64 m² à Paris 15e. S'agit-il d'une résidence principale ou d'un investissement ?<time>21:47</time></div><div class="m me">Bonsoir, résidence principale. C'est notre premier achat.<time>21:49</time></div><div class="m ai"><span class="by"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>Assistant IA Bonapart</span>Merci. Avez-vous un accord de principe de votre banque, et pour quel budget environ ?<time>21:49</time></div><div class="m me">Oui, accord de principe jusqu'à 500 000 €.<time>21:50</time></div><div class="m ai"><span class="by"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>Assistant IA Bonapart</span>Parfait. Avez-vous un bien à vendre avant cet achat ?<time>21:50</time></div><div class="m me">Non, aucun.<time>21:51</time></div><div class="m ai"><span class="by"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>Assistant IA Bonapart</span>Noté. Quelles sont vos disponibilités pour une visite ?<time>21:51</time></div><div class="m me">Plutôt jeudi en fin de journée, ou samedi matin.<time>21:52</time></div><div class="typing" id="s3typing"><i></i><i></i><i></i></div></div></div><span class="home"></span></div></div><div class="fiche" id="s3fiche"><div class="top"><span class="av g" style="width:44px;height:44px;font-size:15px">TM</span><div><h4>Thomas Martin</h4><p>Acquéreur, via bonapart.fr</p></div><span class="gauge" data-score="0" data-size="56"></span></div>
+<div class="lst"><span class="ph" style="overflow:hidden;border-radius:10px"><svg viewBox="0 0 300 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="wl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6F1E8"/><stop offset="1" stop-color="#E9E1D3"/></linearGradient><linearGradient id="fl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C79B6A"/><stop offset="1" stop-color="#B0855A"/></linearGradient><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFD9EE"/><stop offset="1" stop-color="#EAF2F7"/></linearGradient></defs><rect width="300" height="150" fill="url(#wl)"/><rect y="112" width="300" height="38" fill="url(#fl)"/><g stroke="#A27A50" stroke-width=".6" opacity=".5"><path d="M0 120h300M0 130h300M0 141h300"/></g><rect x="170" y="18" width="70" height="94" fill="url(#sky)" stroke="#fff" stroke-width="5"/><path d="M205 18v94M170 60h70" stroke="#fff" stroke-width="3"/><rect x="34" y="78" width="96" height="30" rx="8" fill="#85C441" opacity=".85"/><rect x="40" y="66" width="84" height="18" rx="6" fill="#9ED15E" opacity=".9"/><rect x="40" y="106" width="5" height="8" fill="#6B5A47"/><rect x="119" y="106" width="5" height="8" fill="#6B5A47"/><circle cx="262" cy="96" r="10" fill="#6AA62E" opacity=".7"/><rect x="258" y="100" width="8" height="12" fill="#C4703A"/><rect x="60" y="30" width="44" height="30" fill="#fff" stroke="#E0D6C4" stroke-width="2"/><path d="M64 55l12-12 9 8 6-5 9 9" fill="none" stroke="#FF9F43" stroke-width="2"/></svg></span><div><b>3 pièces, 64 m², Paris 15e</b><small>489 000 €</small></div></div>
+<div class="fbar"><i></i></div>
+<div class="frow " data-r="1"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6AA62E" stroke-width="2.2" stroke-linejoin="round"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg></span><div><small>Projet</small><b>En attente</b></div><span class="st"><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i></span></div><div class="frow " data-r="2"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6AA62E" stroke-width="2.2" stroke-linecap="round"><path d="M17 6.5A7 7 0 1 0 17 17.5M4 10h9M4 14h9"/></svg></span><div><small>Financement</small><b>En attente</b></div><span class="st"><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i></span></div><div class="frow " data-r="3"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6AA62E" stroke-width="2.2" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3"/></svg></span><div><small>Bien à vendre</small><b>En attente</b></div><span class="st"><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i></span></div><div class="frow " data-r="4"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6AA62E" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><small>Disponibilités</small><b>En attente</b></div><span class="st"><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i></span></div><div class="frow orange" data-r="5"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F08A26" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></span><div><small>Visite</small><b>En attente</b></div><span class="st"><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i></span></div></div></div></section><section class="scene" id="sc4" data-scene="4">
+<div class="stxt"><span class="n">4</span><div class="time">21:53</div><span class="when">Six minutes après la demande</span>
+<h3>Thomas réserve sa visite</h3><p>Il clique sur un créneau dans l'email et le confirme sur la page de réservation Bonapart. La visite est posée en provisoire dans l'agenda de Marc, et l'assistant rappelle qu'il est une IA.</p><button class="replay" data-replay="4"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Rejouer</button></div>
+<div class="sstage"><div class="phone"><div class="screen"><div class="island"></div><div class="status"><span>21:53</span><span class="sig"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="currentColor"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="currentColor"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="currentColor"/></svg><svg width="24" height="11" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/><rect x="21.5" y="3.5" width="1.5" height="4" rx=".7" fill="currentColor" opacity=".4"/></svg></span></div><div class="body"><div class="mhead"><span class="av g" style="background:var(--green);color:#fff">B</span><div><b>Assistant Bonapart</b><small>Appartement 3 pièces, Paris 15e</small></div></div><div class="mthread" id="s4thread"><span class="day">Ce soir</span><div class="m me">Plutôt jeudi en fin de journée, ou samedi matin.<time>21:52</time></div><div class="m ai"><span class="by"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>Assistant IA Bonapart</span>Merci Thomas. Choisissez un créneau en cliquant dessus :<div class="slots"><span id="s4slot">Jeudi 29 oct. <b>18:30</b></span><span>Samedi 31 oct. <b>10:00</b></span></div><time>21:52</time></div><div class="m me">C'est réservé pour jeudi, merci ! Vous êtes un humain&nbsp;?<time>21:53</time></div><div class="m ai"><span class="by"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>Assistant IA Bonapart</span>Je suis l'assistant IA de Bonapart, pas un humain. Votre créneau de jeudi 18:30 est bien noté. Marc, votre conseiller, vous confirme la visite demain matin. Pour lui parler directement, répondez simplement «&nbsp;conseiller&nbsp;».<time>21:53</time></div><div class="typing" id="s4typing"><i></i><i></i><i></i></div></div></div><div class="webov" id="s4web"><div class="sbar"><span class="done">OK</span><span class="addr"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>visites.bonapart.fr/reserver</span><span style="width:18px"></span></div>
+<div class="bk-page"><img class="lg" src="https://www.bonapart.fr/img/logo.png" alt="Bonapart" onerror="this.outerHTML='<b style=&quot;color:#85C441;font-size:16px;margin-bottom:10px&quot;>BonApart</b>'"><h5>Réserver une visite</h5><p class="sub">Créneaux libres de votre conseiller, Marc</p>
+<div class="bk-list"><span class="ph"><svg viewBox="0 0 300 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="wl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6F1E8"/><stop offset="1" stop-color="#E9E1D3"/></linearGradient><linearGradient id="fl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C79B6A"/><stop offset="1" stop-color="#B0855A"/></linearGradient><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFD9EE"/><stop offset="1" stop-color="#EAF2F7"/></linearGradient></defs><rect width="300" height="150" fill="url(#wl)"/><rect y="112" width="300" height="38" fill="url(#fl)"/><g stroke="#A27A50" stroke-width=".6" opacity=".5"><path d="M0 120h300M0 130h300M0 141h300"/></g><rect x="170" y="18" width="70" height="94" fill="url(#sky)" stroke="#fff" stroke-width="5"/><path d="M205 18v94M170 60h70" stroke="#fff" stroke-width="3"/><rect x="34" y="78" width="96" height="30" rx="8" fill="#85C441" opacity=".85"/><rect x="40" y="66" width="84" height="18" rx="6" fill="#9ED15E" opacity=".9"/><rect x="40" y="106" width="5" height="8" fill="#6B5A47"/><rect x="119" y="106" width="5" height="8" fill="#6B5A47"/><circle cx="262" cy="96" r="10" fill="#6AA62E" opacity=".7"/><rect x="258" y="100" width="8" height="12" fill="#C4703A"/><rect x="60" y="30" width="44" height="30" fill="#fff" stroke="#E0D6C4" stroke-width="2"/><path d="M64 55l12-12 9 8 6-5 9 9" fill="none" stroke="#FF9F43" stroke-width="2"/></svg></span><div><b>3 pièces, 64 m², Paris 15e</b><small>489 000 €</small></div></div>
+<p class="lbl">Choisissez un créneau</p>
+<div class="times"><span id="s4t1"><small>Jeudi 29 oct.</small><b>18:30</b></span><span><small>Samedi 31 oct.</small><b>10:00</b></span><span><small>Lundi 2 nov.</small><b>12:30</b></span><span><small>Mardi 3 nov.</small><b>18:00</b></span></div>
+<p class="note">Marc confirme la visite et le lieu du rendez-vous par email. Vous pourrez annuler ou déplacer à tout moment.</p>
+<span class="wbtn" id="s4btn">Réserver ce créneau</span>
+<div class="bk-ok" id="s4ok"><div class="ck"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6AA62E" stroke-width="3" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></div><h5>Créneau réservé</h5><p>Jeudi 29 octobre à 18:30.<br>Marc vous confirme la visite demain matin.</p><span class="pill p-visit">En attente de confirmation</span></div>
+</div></div><span class="home"></span></div></div><div style="display:flex;flex-direction:column;gap:16px"><div class="gcal"><div class="hd"><b>Jeudi 29 octobre</b><span class="muted">Agenda de Marc</span></div>
+<div class="gslot"><time>17:00</time><div><span class="ev busy">Visite, 4 pièces</span></div></div>
+<div class="gslot"><time>17:45</time><div></div></div>
+<div class="gslot"><time>18:30</time><div><span class="ev prov" id="s4ev">[À CONFIRMER] Thomas M.</span></div></div>
+<div class="gslot"><time>19:15</time><div></div></div></div><div class="fiche" id="s4fiche"><div class="top"><span class="av g" style="width:44px;height:44px;font-size:15px">TM</span><div><h4>Thomas Martin</h4><p>Acquéreur, via bonapart.fr</p></div><span class="gauge" data-score="0" data-size="56"></span></div>
+<div class="lst"><span class="ph" style="overflow:hidden;border-radius:10px"><svg viewBox="0 0 300 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="wl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6F1E8"/><stop offset="1" stop-color="#E9E1D3"/></linearGradient><linearGradient id="fl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C79B6A"/><stop offset="1" stop-color="#B0855A"/></linearGradient><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFD9EE"/><stop offset="1" stop-color="#EAF2F7"/></linearGradient></defs><rect width="300" height="150" fill="url(#wl)"/><rect y="112" width="300" height="38" fill="url(#fl)"/><g stroke="#A27A50" stroke-width=".6" opacity=".5"><path d="M0 120h300M0 130h300M0 141h300"/></g><rect x="170" y="18" width="70" height="94" fill="url(#sky)" stroke="#fff" stroke-width="5"/><path d="M205 18v94M170 60h70" stroke="#fff" stroke-width="3"/><rect x="34" y="78" width="96" height="30" rx="8" fill="#85C441" opacity=".85"/><rect x="40" y="66" width="84" height="18" rx="6" fill="#9ED15E" opacity=".9"/><rect x="40" y="106" width="5" height="8" fill="#6B5A47"/><rect x="119" y="106" width="5" height="8" fill="#6B5A47"/><circle cx="262" cy="96" r="10" fill="#6AA62E" opacity=".7"/><rect x="258" y="100" width="8" height="12" fill="#C4703A"/><rect x="60" y="30" width="44" height="30" fill="#fff" stroke="#E0D6C4" stroke-width="2"/><path d="M64 55l12-12 9 8 6-5 9 9" fill="none" stroke="#FF9F43" stroke-width="2"/></svg></span><div><b>3 pièces, 64 m², Paris 15e</b><small>489 000 €</small></div></div>
+<div class="fbar"><i></i></div>
+<div class="frow " data-r="1"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6AA62E" stroke-width="2.2" stroke-linejoin="round"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg></span><div><small>Projet</small><b>En attente</b></div><span class="st"><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i></span></div><div class="frow " data-r="2"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6AA62E" stroke-width="2.2" stroke-linecap="round"><path d="M17 6.5A7 7 0 1 0 17 17.5M4 10h9M4 14h9"/></svg></span><div><small>Financement</small><b>En attente</b></div><span class="st"><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i></span></div><div class="frow " data-r="3"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6AA62E" stroke-width="2.2" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3"/></svg></span><div><small>Bien à vendre</small><b>En attente</b></div><span class="st"><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i></span></div><div class="frow " data-r="4"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6AA62E" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><small>Disponibilités</small><b>En attente</b></div><span class="st"><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i></span></div><div class="frow orange" data-r="5"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F08A26" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></span><div><small>Visite</small><b>En attente</b></div><span class="st"><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i></span></div></div></div></div></section><section class="scene morning" id="sc5" data-scene="5">
+<div class="stxt"><span class="n">5</span><div class="time">07:52</div><span class="when">Le lendemain matin</span>
+<h3>Marc valide la visite avant d'arriver à l'agence</h3><p>Le récap et la visite l'attendent sur son téléphone. Un geste, et Thomas reçoit la confirmation avec l'invitation agenda.</p><button class="replay" data-replay="5"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Rejouer</button></div>
+<div class="sstage"><div class="phone"><div class="screen"><div class="island"></div><div class="status"><span>07:52</span><span class="sig"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="currentColor"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="currentColor"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="currentColor"/></svg><svg width="24" height="11" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/><rect x="21.5" y="3.5" width="1.5" height="4" rx=".7" fill="currentColor" opacity=".4"/></svg></span></div><div class="lock" id="s5lock"><small>mercredi 28 octobre</small><b>07:52</b><div class="spacer"></div>
+<div class="notif" id="s5n1"><span class="ap">B</span><div><b>Bonapart Visites<span>07:30</span></b><p>Votre récap : 9 nouveaux prospects, 1 visite à valider.</p></div></div>
+<div class="notif" id="s5n2"><span class="ap">B</span><div><b>Visite à valider<span>21:53</span></b><p>Thomas Martin, jeudi 18:30, 3 pièces Paris 15e. Score 80.</p></div></div>
+<div style="height:96px"></div></div>
+<div class="body"><div class="scroll" id="s5app">
+<div class="nav"><span class="bk"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#3C3956" stroke-width="2.4" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg></span><span class="t">Visite à valider</span><span style="width:34px"></span></div>
+<div class="vcard"><div class="when"><div class="date"><small>OCT.</small><b>29</b><i>jeudi</i></div><div><h4>18:30 à 19:00</h4><p>3 pièces, 64 m², Paris 15e</p><span class="pill p-visit prov-pill" style="margin-top:5px">Provisoire</span><span class="pill p-ok confirmed-pill" style="margin-top:5px">Confirmée</span></div></div>
+<div class="vprospect"><span class="av g">TM</span><div class="mid"><b>Thomas Martin</b><small>Résidence principale, accord 500 000 €</small></div><span class="gauge" id="s5g" data-score="80" data-size="36"></span></div></div>
+<div class="field"><label>Lieu du rendez-vous</label><input id="s5rdv" placeholder="Adresse exacte ou point de rendez-vous" readonly></div>
+<div class="done-msg"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg><span>Visite confirmée. Thomas a reçu l'invitation et le lieu du rendez-vous.</span></div>
+<button class="btn primary" id="s5btn">Valider la visite</button><button class="btn ghost">Proposer un autre créneau</button>
+</div></div><span class="home"></span></div></div><div class="phone"><div class="screen"><div class="island"></div><div class="status"><span>08:01</span><span class="sig"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="currentColor"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="currentColor"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="currentColor"/></svg><svg width="24" height="11" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/><rect x="21.5" y="3.5" width="1.5" height="4" rx=".7" fill="currentColor" opacity=".4"/></svg></span></div><div class="body"><div class="scroll"><div class="mhead"><span class="av g" style="background:var(--green);color:#fff">B</span><div><b>Assistant Bonapart</b><small>Appartement 3 pièces, Paris 15e</small></div></div>
+<div style="padding:40px 10px;text-align:center;color:var(--muted);font-size:12px" id="s5wait">En attente de la confirmation de Marc…</div></div></div>
+<div class="inmail" id="s5mail"><div class="mail-top" style="margin-top:6px"><span>‹ Boîte de réception</span><span></span></div>
+<div class="cmail"><div class="ck"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#6AA62E" stroke-width="3" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></div><h4>Votre visite est confirmée</h4><p class="muted" style="font-size:11.5px;margin:3px 0 8px">Bonjour Thomas, Marc vous attend jeudi.</p>
+<div class="rowi"><span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F08A26" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></span><div><b>Jeudi 29 octobre, 18:30</b><small>Durée : 30 minutes</small></div></div>
+<div class="rowi"><span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6AA62E" stroke-width="2.2" stroke-linejoin="round"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg></span><div><b>Devant l'agence Bonapart Paris 15e</b><small>92 rue de la Convention, 75015 Paris</small></div></div>
+<div class="rowi"><span><span class="av g" style="width:18px;height:18px;font-size:9px">M</span></span><div><b>Marc, votre conseiller</b><small>Agence Paris 15e</small></div></div>
+<div class="b2"><span style="background:var(--green);color:#fff">Ajouter à mon agenda</span><span style="background:var(--mist)">Annuler ou déplacer</span></div>
+<p class="muted" style="font-size:10.5px;margin-top:8px">Un rappel vous sera envoyé la veille.</p></div></div><span class="home"></span></div></div></div></section></div>
+<div class="sec-t" id="ecrans"><h2>Les écrans de l'application</h2><p>Sur iPhone pour les agents en déplacement, sur ordinateur à l'agence. Exemple en location.</p></div>
+<div class="switch"><div role="tablist" aria-label="Affichage">
+<button role="tab" aria-selected="true" data-target="phone"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="6" y="2" width="12" height="20" rx="3"/></svg>iPhone</button>
+<button role="tab" aria-selected="false" data-target="desk"><svg width="16" height="14" viewBox="0 0 26 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="4" y="2" width="18" height="12" rx="2"/><path d="M1 18h24"/></svg>Ordinateur</button>
+</div></div>
+<main class="view flow" data-view="phone">
+
+  <!-- 1. Demandes -->
+  <article class="step">
+    <div class="phone"><div class="screen">
+      <div class="island"></div>
+      <div class="status"><span>21:52</span><span class="sig"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="currentColor"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="currentColor"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="currentColor"/></svg><svg width="24" height="11" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/><rect x="21.5" y="3.5" width="1.5" height="4" rx=".7" fill="currentColor" opacity=".4"/></svg></span></div>
+      <div class="body"><div class="scroll">
+        <div class="s1-top">
+          <img src="https://www.bonapart.fr/img/logo.png" alt="Bonapart" onerror="this.outerHTML='<b style=&quot;color:#85C441;font-size:18px&quot;>BonApart</b>'">
+          <span class="bell" aria-label="2 alertes"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#3C3956" stroke-width="2" stroke-linecap="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M10.3 20a1.9 1.9 0 0 0 3.4 0"/></svg><i></i></span>
+        </div>
+        <p class="hello">Bonsoir Sophie, Paris 9e</p>
+        <p class="big">12 nouvelles demandes depuis 18 h</p>
+        <div class="seg" role="tablist"><button class="on">Toutes</button><button>Location</button><button>Vente</button></div>
+        <button class="alert">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+          <span><strong>2 visites à valider</strong><small>Jeudi 18:30 et samedi 10:00</small></span>
+          <span class="go"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></span>
+        </button>
+
+        <div class="lead fresh">
+          <span class="av g">CR</span>
+          <div class="mid">
+            <div class="nm"><em>Camille Rousseau</em> <span>21:47</span></div>
+            <div class="ad">T2 meublé, Aulnay-sous-Bois</div>
+            <div class="meta"><span class="pill p-visit">Visite à valider</span><span class="speed"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>47 s</span></div>
+          </div>
+          <span class="gauge" data-score="80" data-size="34"></span>
+        </div>
+        <div class="lead">
+          <span class="av">TM</span>
+          <div class="mid">
+            <div class="nm"><em>Thomas Martin</em> <span>21:31</span></div>
+            <div class="ad">2 pièces 52 m², Ivry-sur-Seine</div>
+            <div class="meta"><span class="pill p-qual">En qualification</span><span class="type">Location</span></div>
+          </div>
+          <span class="gauge" data-score="40" data-size="34"></span>
+        </div>
+        <div class="lead">
+          <span class="av o">LB</span>
+          <div class="mid">
+            <div class="nm"><em>Léa Bernard</em> <span>20:58</span></div>
+            <div class="ad">Duplex 3 pièces 83 m², Ivry-sur-Seine</div>
+            <div class="meta"><span class="pill p-ok">Qualifiée</span><span class="type">Location</span></div>
+          </div>
+          <span class="gauge" data-score="100" data-size="34"></span>
+        </div>
+        <div class="lead">
+          <span class="av">KD</span>
+          <div class="mid">
+            <div class="nm"><em>Karim Diallo</em> <span>20:12</span></div>
+            <div class="ad">Appartement 3 pièces, Paris 15e</div>
+            <div class="meta"><span class="pill p-new">Nouvelle</span><span class="type">Vente</span></div>
+          </div>
+          <span class="gauge" data-score="0" data-size="34"></span>
+        </div>
+      </div></div>
+      <nav class="tabbar">
+        <span class="on"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"/></svg>Demandes</span>
+        <span><i class="badge">2</i><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>Visites</span>
+        <span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Annonces</span>
+        <span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Compte</span>
+      </nav>
+      <span class="home"></span>
+    </div></div>
+    <div class="cap"><span class="n">1</span><h2>Toutes les demandes, triées</h2><p>Chaque demande arrive avec son annonce, son score et le temps de réponse de l'assistant.</p></div>
+  </article>
+
+  <!-- 2. Fiche -->
+  <article class="step">
+    <div class="phone"><div class="screen">
+      <div class="island"></div>
+      <div class="status"><span>21:53</span><span class="sig"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="currentColor"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="currentColor"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="currentColor"/></svg><svg width="24" height="11" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/><rect x="21.5" y="3.5" width="1.5" height="4" rx=".7" fill="currentColor" opacity=".4"/></svg></span></div>
+      <div class="body"><div class="scroll">
+        <div class="nav">
+          <span class="bk"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#3C3956" stroke-width="2.4" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg></span>
+          <span class="t">Fiche candidat</span>
+          <span class="bk"><svg class="icon" viewBox="0 0 24 24" fill="#3C3956"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></span>
+        </div>
+        <div class="who">
+          <span class="av g" style="width:46px;height:46px;font-size:16px">CR</span>
+          <div><h3>Camille Rousseau</h3><p>Candidate locataire, via «&nbsp;Postuler&nbsp;»</p></div>
+        </div>
+        <div class="listing">
+          <img class="ph" src="https://www.bonapart.fr/offer-images/2026/10/img-4660.jpg" alt="" onerror="this.onerror=null;this.src='data:image/gif;base64,R0lGODlhAQABAAAAACw='">
+          <div><b>T2 meublé, 35 m²</b><small>Aulnay-sous-Bois (93600)</small><div class="pr">1 000 € / mois CC</div></div>
+        </div>
+        <div class="card">
+          <div class="qual">
+            <span class="gauge" data-score="80" data-size="74"></span>
+            <div><h4>Très bon dossier</h4><p>4 critères sur 5 renseignés. La visite reste à valider.</p></div>
+          </div>
+          <ul class="qlist">
+            <li><span><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i>Date d'entrée</span><b>Début décembre</b></li>
+            <li><span><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i>Situation</span><b>CDI</b></li>
+            <li><span><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i>Revenus ≥ 3 × le loyer</span><b>Oui</b></li>
+            <li><span><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i>Garant</span><b>Visale</b></li>
+            <li><span><i class="wait"></i>Visite</span><b style="color:var(--orange-d)">Jeu. 29 oct., 18:30</b></li>
+          </ul>
+        </div>
+        <div class="card tl" style="margin-top:10px">
+          <h4>Activité de l'assistant</h4>
+          <ul>
+            <li class="done"><time>21:47:02</time><i></i><span>Demande reçue</span></li>
+            <li class="done"><time>21:47:04</time><i></i><span>Annonce identifiée, fiche créée</span></li>
+            <li class="done"><time>21:47:49</time><i></i><span>Premier email envoyé <em>en 47 s</em></span></li>
+            <li class="done"><time>21:51:10</time><i></i><span>Visite posée en provisoire</span></li>
+            <li><time>À faire</time><i></i><span>Votre validation</span></li>
+          </ul>
+        </div>
+      </div></div>
+      <span class="home"></span>
+    </div></div>
+    <div class="cap"><span class="n">2</span><h2>La fiche se remplit seule</h2><p>Les réponses du candidat cochent les critères et font monter la jauge, en forme de maison Bonapart.</p></div>
+  </article>
+
+  <!-- 3. Conversation -->
+  <article class="step">
+    <div class="phone"><div class="screen">
+      <div class="island"></div>
+      <div class="status"><span>21:53</span><span class="sig"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="currentColor"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="currentColor"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="currentColor"/></svg><svg width="24" height="11" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/><rect x="21.5" y="3.5" width="1.5" height="4" rx=".7" fill="currentColor" opacity=".4"/></svg></span></div>
+      <div class="body">
+        <div class="chat-head">
+          <span class="av g">CR</span>
+          <div class="mid"><b>Camille R.</b><span class="live" id="liveState">Assistant actif</span></div>
+          <button class="take" id="takeBtn" aria-pressed="false">Reprendre</button>
+        </div>
+        <div class="scroll"><div class="msgs">
+          <span class="day">Ce soir, par email</span>
+          <div class="m ai"><span class="by"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>Assistant IA Bonapart</span>Bonjour Camille, je suis l'assistant IA de Bonapart. Merci pour votre intérêt pour le T2 meublé de 35 m² à Aulnay-sous-Bois. Pour préparer la visite, quelle date d'entrée souhaitez-vous ?<time>21:47</time></div>
+          <div class="m me">Bonsoir ! Début décembre idéalement. Je suis en CDI, avec la garantie Visale.<time>21:49</time></div>
+          <div class="m ai"><span class="by"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>Assistant IA Bonapart</span>Merci. Vos revenus atteignent-ils au moins 3 fois le loyer ? Un simple oui ou non suffit.<time>21:49</time></div>
+          <div class="m me">Oui.<time>21:50</time></div>
+          <div class="m ai"><span class="by"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>Assistant IA Bonapart</span>Parfait. Voici les prochains créneaux de visite :
+            <div class="slots"><span class="pick">Jeudi 29 oct. <b>18:30</b></span><span>Samedi 31 oct. <b>10:00</b></span><span>Lundi 2 nov. <b>12:30</b></span></div><time>21:50</time></div>
+          <div class="m me">Jeudi 18h30, parfait.<time>21:51</time></div>
+          <div class="m ai"><span class="by"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>Assistant IA Bonapart</span>C'est noté, le créneau est réservé pour vous. Votre conseillère vous confirme la visite et le lieu de rendez-vous très vite.<time>21:51</time></div>
+        </div></div>
+        <div class="compose"><div id="composeTxt"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>L'assistant répond pour vous</div></div>
+      </div>
+      <span class="home"></span>
+    </div></div>
+    <div class="cap"><span class="n">3</span><h2>Un échange court et transparent</h2><p>L'assistant se présente comme une IA, ne promet rien et vous laisse reprendre la main à tout moment.</p></div>
+  </article>
+
+  <!-- 4. Valider -->
+  <article class="step">
+    <div class="phone"><div class="screen">
+      <div class="island"></div>
+      <div class="status"><span>21:54</span><span class="sig"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="currentColor"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="currentColor"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="currentColor"/></svg><svg width="24" height="11" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/><rect x="21.5" y="3.5" width="1.5" height="4" rx=".7" fill="currentColor" opacity=".4"/></svg></span></div>
+      <div class="body"><div class="scroll" id="visitScreen">
+        <div class="nav">
+          <span class="bk"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#3C3956" stroke-width="2.4" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg></span>
+          <span class="t">Visite à valider</span>
+          <span style="width:34px"></span>
+        </div>
+        <div class="vcard">
+          <div class="when">
+            <div class="date"><small>OCT.</small><b>29</b><i>jeudi</i></div>
+            <div><h4>18:30 à 19:00</h4><p>T2 meublé, Aulnay-sous-Bois</p>
+              <span class="pill p-visit prov-pill" style="margin-top:5px">Provisoire</span>
+              <span class="pill p-ok confirmed-pill" style="margin-top:5px">Confirmée</span></div>
+          </div>
+          <div class="vprospect">
+            <span class="av g">CR</span>
+            <div class="mid"><b>Camille Rousseau</b><small>CDI, Visale, entrée en décembre</small></div>
+            <span class="gauge" data-score="80" data-size="36"></span>
+          </div>
+        </div>
+        <div class="agenda">
+          <div class="hd"><b>Jeudi 29 octobre</b><span class="muted">Google Agenda</span></div>
+          <div class="slot"><time>17:00</time><div><span class="ev busy">Visite, 2 pièces Ivry</span></div></div>
+          <div class="slot"><time>17:45</time><div></div></div>
+          <div class="slot"><time>18:30</time><div><span class="ev prov" id="evProv">[À CONFIRMER] Camille R.</span></div></div>
+          <div class="slot"><time>19:15</time><div></div></div>
+        </div>
+        <div class="field">
+          <label for="rdv">Lieu du rendez-vous, envoyé à la validation</label>
+          <input id="rdv" placeholder="Adresse exacte ou point de rendez-vous">
+        </div>
+        <div class="done-msg"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg><span>Visite confirmée. Camille a reçu l'invitation et le lieu du rendez-vous. Rappel envoyé la veille.</span></div>
+        <button class="btn primary" id="validateBtn">Valider la visite</button>
+        <button class="btn ghost">Proposer un autre créneau</button>
+      </div></div>
+      <span class="home"></span>
+    </div></div>
+    <div class="cap"><span class="n">4</span><h2>Vous validez d'un geste</h2><p>Le créneau est déjà bloqué dans votre agenda. Vous ajoutez le lieu, l'invitation part au candidat. Essayez le bouton.</p></div>
+  </article>
+
+  <!-- 5. Récap -->
+  <article class="step">
+    <div class="phone"><div class="screen">
+      <div class="island"></div>
+      <div class="status"><span>07:52</span><span class="sig"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="currentColor"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="currentColor"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="currentColor"/></svg><svg width="24" height="11" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/><rect x="21.5" y="3.5" width="1.5" height="4" rx=".7" fill="currentColor" opacity=".4"/></svg></span></div>
+      <div class="body"><div class="scroll">
+        <div class="mail-top"><span>‹ Boîte de réception</span><span>⋯</span></div>
+        <div class="mail-from">
+          <span class="av g" style="background:var(--green);color:#fff">B</span>
+          <div><b>Assistant Bonapart</b><small>À : Sophie, aujourd'hui 07:30</small></div>
+        </div>
+        <div class="mail">
+          <img src="https://www.bonapart.fr/img/logo.png" alt="Bonapart" onerror="this.style.display='none'">
+          <h3>Votre récap du mercredi 28 octobre</h3>
+          <p class="sub">Agence Paris 9e, activité depuis hier 18 h</p>
+          <div class="kpis">
+            <div><b>12</b><small>nouveaux prospects</small></div>
+            <div class="o"><b>2</b><small>visites à valider</small></div>
+            <div class="g"><b>4</b><small>visites aujourd'hui</small></div>
+          </div>
+          <h5>Visites du jour</h5>
+          <div class="vis"><time>10:00</time><div class="mid">Léa Bernard<small>Duplex 3 pièces, Ivry-sur-Seine</small></div><span class="gauge" data-score="100" data-size="28"></span></div>
+          <div class="vis"><time>12:30</time><div class="mid">Hugo Petit<small>Studio 20 m², rénové</small></div><span class="gauge" data-score="60" data-size="28"></span></div>
+          <div class="vis"><time>17:00</time><div class="mid">Nora Lefèvre<small>3 pièces, Villejuif</small></div><span class="gauge" data-score="80" data-size="28"></span></div>
+          <div class="flag"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#F08A26" stroke-width="2.2" stroke-linecap="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><div><b>1 annonce à vérifier</b>T2 Aulnay : 35 m² en titre, 37 m² dans la description. L'assistant ne cite pas la surface.</div></div>
+          <span class="cta">Ouvrir l'application</span>
+        </div>
+      </div></div>
+      <span class="home"></span>
+    </div></div>
+    <div class="cap"><span class="n">5</span><h2>Le récap avant d'arriver</h2><p>Chaque matin, les visites du jour, celles à valider et les annonces à corriger.</p></div>
+  </article>
+
+</main>
+<section class="view desk" data-view="desk" hidden>
+<article><div class="win"><div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="url"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>visites.bonapart.fr/demandes</span><span style="width:47px"></span></div><div class="stage"><div class="app"><aside class="side"><img src="https://www.bonapart.fr/img/logo.png" alt="Bonapart" onerror="this.outerHTML='<b style=&quot;color:#85C441;font-size:22px;margin:0 6px 20px&quot;>BonApart</b>'">
+<div class="agency"><div>Paris 9e<small>46 bis rue de Clichy</small></div><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#817F96" stroke-width="3" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></div>
+<nav class="navl"><a href="#" class="on"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"/></svg>Demandes<span class="">12</span></a><a href="#" class=""><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>Visites<span class="hot">2</span></a><a href="#" class=""><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Annonces<span class="">255</span></a><a href="#"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Résultats</a><a href="#"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>Réglages</a></nav>
+<div class="bot"><div class="aistate"><span class="live">Assistant actif</span><p>Temps de réponse moyen cette semaine</p><b>52 s</b></div>
+<div class="me"><span class="av g">S</span><div><b>Sophie</b><small>Agente, Paris 9e</small></div></div></div></aside>
+<div class="mainc"><div class="topb"><h1>Demandes</h1><div class="search"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Rechercher un prospect, une annonce</div><span class="bell"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#3C3956" stroke-width="2" stroke-linecap="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M10.3 20a1.9 1.9 0 0 0 3.4 0"/></svg><i></i></span><button class="btn-o">Ajouter une annonce</button></div>
+<div class="panes">
+<section class="pane inbox"><div class="seg"><button class="on">Toutes</button><button>Location</button><button>Vente</button></div><div class="scroll"><div class="lead sel"><span class="av g">CR</span><div class="mid"><div class="nm"><em>Camille Rousseau</em> <span>21:47</span></div><div class="ad">T2 meublé, Aulnay-sous-Bois</div><div class="meta"><span class="pill p-visit">Visite à valider</span><span class="speed"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>47 s</span></div></div><span class="gauge" data-score="80" data-size="34"></span></div><div class="lead"><span class="av ">TM</span><div class="mid"><div class="nm"><em>Thomas Martin</em> <span>21:31</span></div><div class="ad">2 pièces 52 m², Ivry-sur-Seine</div><div class="meta"><span class="pill p-qual">En qualification</span><span class="type">Location</span></div></div><span class="gauge" data-score="40" data-size="34"></span></div><div class="lead"><span class="av o">LB</span><div class="mid"><div class="nm"><em>Léa Bernard</em> <span>20:58</span></div><div class="ad">Duplex 3 pièces 83 m², Ivry-sur-Seine</div><div class="meta"><span class="pill p-ok">Qualifiée</span><span class="type">Location</span></div></div><span class="gauge" data-score="100" data-size="34"></span></div><div class="lead"><span class="av ">KD</span><div class="mid"><div class="nm"><em>Karim Diallo</em> <span>20:12</span></div><div class="ad">Appartement 3 pièces, Paris 15e</div><div class="meta"><span class="pill p-new">Nouvelle</span><span class="type">Vente</span></div></div><span class="gauge" data-score="0" data-size="34"></span></div><div class="lead"><span class="av g">HP</span><div class="mid"><div class="nm"><em>Hugo Petit</em> <span>19:40</span></div><div class="ad">Studio 20 m², rénové</div><div class="meta"><span class="pill p-ok">Visite confirmée</span><span class="type">Location</span></div></div><span class="gauge" data-score="60" data-size="34"></span></div></div></section>
+<section class="pane convo"><div class="chat-head"><span class="av g">CR</span><div class="mid"><b>Camille Rousseau</b><span class="live" id="liveStateD">Assistant actif</span></div><button class="take" id="takeBtnD" aria-pressed="false">Reprendre la main</button></div>
+<div class="scroll"><div class="msgs"><span class="day">Ce soir, par email</span><div class="m ai"><span class="by"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>Assistant IA Bonapart</span>Bonjour Camille, je suis l'assistant IA de Bonapart. Merci pour votre intérêt pour le T2 meublé de 35 m² à Aulnay-sous-Bois. Pour préparer la visite, quelle date d'entrée souhaitez-vous ?<time>21:47</time></div><div class="m me">Bonsoir ! Début décembre idéalement. Je suis en CDI, avec la garantie Visale.<time>21:49</time></div><div class="m ai"><span class="by"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>Assistant IA Bonapart</span>Merci. Vos revenus atteignent-ils au moins 3 fois le loyer ? Un simple oui ou non suffit.<time>21:49</time></div><div class="m me">Oui.<time>21:50</time></div><div class="m ai"><span class="by"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>Assistant IA Bonapart</span>Parfait. Voici les prochains créneaux de visite :<div class="slots"><span class="pick">Jeudi 29 oct. <b>18:30</b></span><span>Samedi 31 oct. <b>10:00</b></span><span>Lundi 2 nov. <b>12:30</b></span></div><time>21:50</time></div><div class="m me">Jeudi 18h30, parfait.<time>21:51</time></div><div class="m ai"><span class="by"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>Assistant IA Bonapart</span>C'est noté, le créneau est réservé pour vous. Votre conseillère vous confirme la visite et le lieu de rendez-vous très vite.<time>21:51</time></div></div></div>
+<div class="compose"><div id="composeTxtD"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>L'assistant répond pour vous. Reprenez la main pour écrire.</span></div></div></section>
+<aside class="pane detail">
+<div class="who"><span class="av g" style="width:46px;height:46px;font-size:16px">CR</span><div><h3>Camille Rousseau</h3><p>Candidate locataire, via «&nbsp;Postuler&nbsp;»</p></div></div>
+<div class="listing"><img class="ph" src="https://www.bonapart.fr/offer-images/2026/10/img-4660.jpg" alt="" onerror="this.onerror=null;this.src='data:image/gif;base64,R0lGODlhAQABAAAAACw='"><div><b>T2 meublé, 35 m²</b><small>Aulnay-sous-Bois (93600)</small><div class="pr">1 000 € / mois CC</div></div></div>
+<div class="visit-mini" id="visitMini"><div class="t"><span id="vmTitle">Visite provisoire</span><span>Jeu. 29 oct., 18:30</span></div><p id="vmText">Posée dans votre Google Agenda. Ajoutez le lieu puis validez.</p><div class="acts"><button class="ok-b" id="vmOk">Valider</button><button class="alt-b">Autre créneau</button></div></div>
+<div class="card"><div class="qual"><span class="gauge" data-score="80" data-size="64"></span><div><h4>Très bon dossier</h4><p>4 critères sur 5 renseignés.</p></div></div>
+<ul class="qlist"><li><span><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i>Date d'entrée</span><b>Début décembre</b></li><li><span><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i>Situation</span><b>CDI</b></li><li><span><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i>Revenus ≥ 3 × le loyer</span><b>Oui</b></li><li><span><i class="ok"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></i>Garant</span><b>Visale</b></li><li><span><i class="wait"></i>Visite</span><b style="color:var(--orange-d)">À valider</b></li></ul></div>
+<div class="tl" style="padding:14px 2px"><h4>Activité de l'assistant</h4><ul>
+<li class="done"><time>21:47:02</time><i></i><span>Demande reçue</span></li>
+<li class="done"><time>21:47:04</time><i></i><span>Annonce identifiée, fiche créée</span></li>
+<li class="done"><time>21:47:49</time><i></i><span>Premier email envoyé <em>en 47 s</em></span></li>
+<li class="done"><time>21:51:10</time><i></i><span>Visite posée en provisoire</span></li>
+<li><time>À faire</time><i></i><span>Votre validation</span></li></ul></div>
+</aside></div></div></div></div></div><div class="dcap"><h2>Tout le dossier sur un seul écran</h2><p>La liste des demandes, la conversation avec l'assistant et la fiche du candidat côte à côte. La visite se valide depuis la fiche.</p></div></article>
+<article><div class="win"><div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="url"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>visites.bonapart.fr/visites</span><span style="width:47px"></span></div><div class="stage"><div class="app"><aside class="side"><img src="https://www.bonapart.fr/img/logo.png" alt="Bonapart" onerror="this.outerHTML='<b style=&quot;color:#85C441;font-size:22px;margin:0 6px 20px&quot;>BonApart</b>'">
+<div class="agency"><div>Paris 9e<small>46 bis rue de Clichy</small></div><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#817F96" stroke-width="3" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></div>
+<nav class="navl"><a href="#" class=""><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"/></svg>Demandes<span class="">12</span></a><a href="#" class="on"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>Visites<span class="hot">2</span></a><a href="#" class=""><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Annonces<span class="">255</span></a><a href="#"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Résultats</a><a href="#"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>Réglages</a></nav>
+<div class="bot"><div class="aistate"><span class="live">Assistant actif</span><p>Temps de réponse moyen cette semaine</p><b>52 s</b></div>
+<div class="me"><span class="av g">S</span><div><b>Sophie</b><small>Agente, Paris 9e</small></div></div></div></aside>
+<div class="mainc"><div class="topb"><h1>Visites, semaine du 26 octobre</h1><div class="search"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Rechercher</div><span class="bell"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#3C3956" stroke-width="2" stroke-linecap="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M10.3 20a1.9 1.9 0 0 0 3.4 0"/></svg><i></i></span><button class="btn-o" style="background:var(--white);color:var(--navy);border:1px solid var(--line)">Google Agenda connecté</button></div>
+<div class="weekwrap"><div style="display:flex;flex-direction:column;min-height:0">
+<div class="kpirow"><div class="kpi"><small>Temps de première réponse</small><b>52 s</b><i>Objectif : moins de 2 min</i></div><div class="kpi"><small>Prospects qualifiés</small><b>64 %</b><i>38 sur 59</i></div><div class="kpi"><small>Visites réservées par l'IA</small><b>18</b><i>dont 2 à valider</i></div><div class="kpi"><small>Passages à l'agent</small><b>3</b><i style="color:var(--muted)">questions hors annonce</i></div></div>
+<div class="week"><div class="wh" style="border-bottom:1px solid var(--line)"></div><div class="wh">lun.<b>26</b></div><div class="wh today">mar.<b>27</b></div><div class="wh">mer.<b>28</b></div><div class="wh">jeu.<b>29</b></div><div class="wh">ven.<b>30</b></div><div class="wh">sam.<b>31</b></div><div class="hours"><span style="top:54px">10:00</span><span style="top:108px">11:00</span><span style="top:162px">12:00</span><span style="top:216px">13:00</span><span style="top:270px">14:00</span><span style="top:324px">15:00</span><span style="top:378px">16:00</span><span style="top:432px">17:00</span><span style="top:486px">18:00</span></div><div class="col"><div class="e x one" style="top:54px;height:24px">Visite passée<small>Studio Évry</small></div><div class="e x one" style="top:270px;height:24px">Visite passée<small>2 p. Villemomble</small></div></div><div class="col"><div class="e c one" style="top:108px;height:24px">Visite<small>3 p. Villejuif</small></div><div class="e g" style="top:432px;height:51px">Visite groupée<small>4 candidats, Ivry</small></div><div class="now" style="top:339px"></div></div><div class="col"><div class="e c one" style="top:54px;height:24px">Léa Bernard<small>Duplex Ivry</small></div><div class="e c one" style="top:189px;height:24px">Hugo Petit<small>Studio rénové</small></div><div class="e c one" style="top:432px;height:24px">Nora Lefèvre<small>3 p. Villejuif</small></div></div><div class="col"><div class="e c one" style="top:432px;height:24px">Visite<small>2 p. Ivry</small></div><div class="e p one" style="top:513px;height:24px">Camille R.<small>à valider</small></div></div><div class="col"><div class="e x" style="top:27px;height:51px">Réunion agence</div><div class="e c one" style="top:378px;height:24px">Visite<small>T2 Aulnay</small></div></div><div class="col"><div class="e p one" style="top:54px;height:24px">Inès M.<small>à valider</small></div><div class="e g" style="top:108px;height:51px">Visite groupée<small>6 candidats, Asnières</small></div></div></div></div>
+<aside class="todo"><h3>À valider</h3><div class="tcard"><div class="row"><span class="av g">CR</span><div style="flex:1"><b>Camille Rousseau</b><small>T2 meublé, Aulnay</small></div><span class="gauge" data-score="80" data-size="32"></span></div><span class="pill p-visit">Jeu. 29 oct., 18:30</span><div class="acts"><button style="background:var(--green);color:#fff">Valider</button><button style="border:1px solid var(--line)">Autre créneau</button></div></div><div class="tcard"><div class="row"><span class="av o">IM</span><div style="flex:1"><b>Inès Moreau</b><small>Studio, Asnières</small></div><span class="gauge" data-score="60" data-size="32"></span></div><span class="pill p-visit">Sam. 31 oct., 10:00</span><div class="acts"><button style="background:var(--green);color:#fff">Valider</button><button style="border:1px solid var(--line)">Autre créneau</button></div></div>
+<div class="legend"><span><i style="background:var(--navy-l)"></i>Visite confirmée</span><span><i style="background:var(--orange-l);border:1.5px dashed var(--orange)"></i>Posée par l'IA, à valider</span><span><i style="background:var(--green)"></i>Visite groupée</span><span><i style="background:#F4F4F6"></i>Autre événement Google Agenda</span></div></aside>
+</div></div></div></div></div><div class="dcap"><h2>La semaine de visites, synchronisée avec Google Agenda</h2><p>Les visites posées par l'IA apparaissent hachurées jusqu'à votre validation. Les visites groupées réunissent plusieurs candidats sur un même créneau.</p></div></article>
+<article><div class="win"><div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="url"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>visites.bonapart.fr/annonces</span><span style="width:47px"></span></div><div class="stage"><div class="app"><aside class="side"><img src="https://www.bonapart.fr/img/logo.png" alt="Bonapart" onerror="this.outerHTML='<b style=&quot;color:#85C441;font-size:22px;margin:0 6px 20px&quot;>BonApart</b>'"><div class="agency"><div>Paris 9e<small>46 bis rue de Clichy</small></div><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#817F96" stroke-width="3" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></div>
+<nav class="navl"><a href="#" class=""><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"/></svg>Demandes<span class="">9</span></a><a href="#" class=""><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>Visites<span class="hot">1</span></a><a href="#" class="on"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Annonces<span class="">255</span></a><a href="#"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Résultats</a><a href="#"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>Réglages</a></nav>
+<div class="bot"><div class="aistate"><span class="live">Assistant actif</span><p>Temps de réponse moyen cette semaine</p><b>52 s</b></div><div class="me"><span class="av g">S</span><div><b>Sophie</b><small>Agent, Paris 9e</small></div></div></div></aside>
+<div class="mainc"><div class="topb"><h1>Annonces</h1><div class="search"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Rechercher une annonce, une référence</div><button class="btn-o">Importer maintenant</button></div>
+<div class="weekwrap" style="grid-template-columns:1fr 320px"><div style="display:flex;flex-direction:column;min-height:0">
+<div class="istat"><div><small>Dernier import depuis bonapart.fr</small><b>Aujourd'hui 15:00</b></div><div><small>Annonces en ligne</small><b>255</b></div><div><small>Nouvelles, retirées</small><b>3, 1</b></div><div style="background:var(--orange-l)"><small>À vérifier</small><b style="color:var(--orange-d)">1</b></div></div>
+<div class="atable"><div class="arow h"><span>Annonce</span><span>Type</span><span>Prix</span><span>Statut</span><span>Mise à jour</span><span></span></div><div class="arow sel"><div class="t"><img src="https://www.bonapart.fr/offer-images/2026/10/img-4660.jpg" alt="" onerror="this.onerror=null;this.src='data:image/gif;base64,R0lGODlhAQABAAAAACw='"><div style="min-width:0"><b>T2 meublé, 35 m²</b><small>Aulnay-sous-Bois (93600)</small></div></div><span class="type" style="justify-self:start">Location</span><b>1 000 € CC</b><span><span class="pill p-ok">En ligne</span></span><span class="muted">Aujourd'hui 15:00</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F08A26" stroke-width="2.2" stroke-linecap="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span></div><div class="arow"><div class="t"><span class="phs" style="overflow:hidden;display:block"><svg viewBox="0 0 300 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="wl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6F1E8"/><stop offset="1" stop-color="#E9E1D3"/></linearGradient><linearGradient id="fl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C79B6A"/><stop offset="1" stop-color="#B0855A"/></linearGradient><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFD9EE"/><stop offset="1" stop-color="#EAF2F7"/></linearGradient></defs><rect width="300" height="150" fill="url(#wl)"/><rect y="112" width="300" height="38" fill="url(#fl)"/><g stroke="#A27A50" stroke-width=".6" opacity=".5"><path d="M0 120h300M0 130h300M0 141h300"/></g><rect x="170" y="18" width="70" height="94" fill="url(#sky)" stroke="#fff" stroke-width="5"/><path d="M205 18v94M170 60h70" stroke="#fff" stroke-width="3"/><rect x="34" y="78" width="96" height="30" rx="8" fill="#85C441" opacity=".85"/><rect x="40" y="66" width="84" height="18" rx="6" fill="#9ED15E" opacity=".9"/><rect x="40" y="106" width="5" height="8" fill="#6B5A47"/><rect x="119" y="106" width="5" height="8" fill="#6B5A47"/><circle cx="262" cy="96" r="10" fill="#6AA62E" opacity=".7"/><rect x="258" y="100" width="8" height="12" fill="#C4703A"/><rect x="60" y="30" width="44" height="30" fill="#fff" stroke="#E0D6C4" stroke-width="2"/><path d="M64 55l12-12 9 8 6-5 9 9" fill="none" stroke="#FF9F43" stroke-width="2"/></svg></span><div style="min-width:0"><b>Appartement 3 pièces, 64 m²</b><small>Paris 15e (75015)</small></div></div><span class="type" style="justify-self:start">Vente</span><b>489 000 €</b><span><span class="pill p-new">Nouvelle</span></span><span class="muted">Aujourd'hui 15:00</span><span></span></div><div class="arow"><div class="t"><img src="https://www.bonapart.fr/offer-images/2026/10/img-5067.jpg" alt="" onerror="this.onerror=null;this.src='data:image/gif;base64,R0lGODlhAQABAAAAACw='"><div style="min-width:0"><b>2 pièces meublé, 52 m²</b><small>Ivry-sur-Seine</small></div></div><span class="type" style="justify-self:start">Location</span><b>1 150 €</b><span><span class="pill p-ok">En ligne</span></span><span class="muted">Hier 18:00</span><span></span></div><div class="arow"><div class="t"><img src="https://www.bonapart.fr/offer-images/2026/10/img-4968.jpg" alt="" onerror="this.onerror=null;this.src='data:image/gif;base64,R0lGODlhAQABAAAAACw='"><div style="min-width:0"><b>Duplex 3 pièces, 83 m²</b><small>Ivry-sur-Seine</small></div></div><span class="type" style="justify-self:start">Location</span><b>1 690 €</b><span><span class="pill p-ok">En ligne</span></span><span class="muted">Hier 18:00</span><span></span></div><div class="arow"><div class="t"><img src="https://www.bonapart.fr/offer-images/2026/10/img-4990.jpg" alt="" onerror="this.onerror=null;this.src='data:image/gif;base64,R0lGODlhAQABAAAAACw='"><div style="min-width:0"><b>3 pièces, Les Barmonts</b><small>Villejuif</small></div></div><span class="type" style="justify-self:start">Location</span><b>1 380 €</b><span><span class="pill p-ok">En ligne</span></span><span class="muted">26 oct.</span><span></span></div><div class="arow"><div class="t"><img src="https://www.bonapart.fr/offer-images/2026/10/img-4970.jpg" alt="" onerror="this.onerror=null;this.src='data:image/gif;base64,R0lGODlhAQABAAAAACw='"><div style="min-width:0"><b>Studio rénové, 20 m²</b><small>Proche transports</small></div></div><span class="type" style="justify-self:start">Location</span><b>760 €</b><span><span class="pill p-qual">Louée</span></span><span class="muted">26 oct.</span><span></span></div><div class="arow"><div class="t"><img src="https://www.bonapart.fr/offer-images/2026/10/96cb8fc8-0346-4f3d-8be1-4fba41146268.jpg" alt="" onerror="this.onerror=null;this.src='data:image/gif;base64,R0lGODlhAQABAAAAACw='"><div style="min-width:0"><b>Studio meublé, 14 m²</b><small>Savigny-sur-Orge</small></div></div><span class="type" style="justify-self:start">Location</span><b>540 €</b><span><span class="pill p-qual">Retirée</span></span><span class="muted">25 oct.</span><span></span></div></div></div>
+<aside class="drawer"><h3>Annonce à vérifier</h3><img class="big-ph" src="https://www.bonapart.fr/offer-images/2026/10/img-4660.jpg" alt="" onerror="this.onerror=null;this.src='data:image/gif;base64,R0lGODlhAQABAAAAACw='">
+<div style="margin-top:10px"><b style="font-size:14px">T2 meublé, Aulnay-sous-Bois</b><div class="muted" style="font-size:11.5px">Offre n°11053911</div></div>
+<div class="conflict"><b>Deux surfaces différentes</b>35 m² dans le titre, 37 m² dans la description. L'assistant ne cite pas la surface tant que ce n'est pas corrigé.<div class="choice"><button>Garder 35 m²</button><button>Garder 37 m²</button></div></div>
+<ul class="fields"><li><span>Loyer</span><b>1 000 € CC</b></li><li><span>Pièces</span><b>2</b></li><li><span>Meublé</span><b>Oui</b></li><li><span>DPE, GES</span><b>D, B</b></li><li><span>Agence</span><b>Paris 9e</b></li><li><span>Disponibilité</span><b class="muted">Non indiquée</b></li></ul>
+</aside></div></div></div></div></div><div class="dcap"><h2>Les annonces importées de bonapart.fr</h2><p>Mises à jour plusieurs fois par jour. Les annonces louées, vendues ou retirées disparaissent des réponses de l'assistant, et les incohérences sont signalées.</p></div></article>
+</section>
+
+
+<div class="sec-t" id="pourquoi"><h2>Pourquoi maintenant</h2><p>La même demande, deux façons de la traiter. Puis ce que l'assistant s'interdit.</p></div>
+<section class="why">
+<div class="ba">
+<div class="bcol before"><h3>Aujourd'hui</h3><p class="lead-in">Une demande arrive un mardi soir.</p><ul class="tline">
+<li class=""><time>21:47</time><i></i><div><b>Thomas envoie sa demande</b><span>L'agence est fermée, personne ne la voit.</span></div></li>
+<li class="bad"><time>Le soir même</time><i></i><div><b>Il contacte d'autres agences</b><span>Il visite peut-être ailleurs en premier.</span></div></li>
+<li class=""><time>À l'ouverture</time><i></i><div><b>L'agent découvre la demande</b><span>Au milieu des autres emails de la nuit.</span></div></li>
+<li class="bad"><time>Dans la journée</time><i></i><div><b>Premier contact, si Thomas répond</b><span>Questions de qualification au téléphone, puis recherche d'un créneau.</span></div></li>
+</ul></div>
+<div class="bcol after"><h3>Avec l'assistant Bonapart</h3><p class="lead-in">La même demande, le même soir.</p><ul class="tline">
+<li class=""><time>21:47</time><i></i><div><b>Thomas envoie sa demande</b><span>Le formulaire de l'annonce sur bonapart.fr.</span></div></li>
+<li class=""><time>21:47:49</time><i></i><div><b>L'assistant lui répond</b><span>Il se présente comme une IA et pose sa première question.</span></div></li>
+<li class=""><time>21:53</time><i></i><div><b>Visite posée dans l'agenda</b><span>Créneau libre choisi par Thomas, en provisoire.</span></div></li>
+<li class=""><time>07:52</time><i></i><div><b>L'agent valide d'un geste</b><span>Thomas reçoit la confirmation et l'invitation.</span></div></li>
+</ul></div></div>
+
+<div class="never"><div><h3>Ce que l'assistant ne fera jamais</h3><p>Il prépare le travail de l'agent. Il ne le remplace pas.</p></div>
+<ul class="nlist">
+<li><span class="x"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F08A26" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><div><b>Se faire passer pour un humain</b><span>Il dit qu'il est une IA dès le premier message.</span></div></li>
+<li><span class="x"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F08A26" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><div><b>Inventer une information</b><span>Il ne parle que de ce qui est écrit dans l'annonce.</span></div></li>
+<li><span class="x"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F08A26" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><div><b>Négocier le prix ou le loyer</b><span>Toute question de prix est transmise à l'agent.</span></div></li>
+<li><span class="x"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F08A26" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><div><b>Donner l'adresse exacte</b><span>L'agent la communique à la validation de la visite.</span></div></li>
+<li><span class="x"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F08A26" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><div><b>Refuser ou trier un candidat</b><span>La jauge aide l'agent, seul l'agent décide.</span></div></li>
+<li><span class="x"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F08A26" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><div><b>Demander des données sensibles</b><span>Ni bulletin de salaire, ni pièce d'identité, ni montant de revenus.</span></div></li>
+<li><span class="x"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F08A26" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><div><b>Insister</b><span>Le prospect peut arrêter les messages à tout moment.</span></div></li>
+<li><span class="x"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F08A26" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><div><b>Garder la main</b><span>L'agent reprend la conversation quand il veut, l'assistant se tait.</span></div></li>
+</ul></div>
+
+</section>
+
+<p class="foot">Maquette de travail. Prospects, agents, créneaux, indicateurs, l'annonce de vente et la plupart des prix sont fictifs. Maquette de proposition réalisée pour Bonapart, non officielle. Logo, couleurs et photos d'annonces issus de bonapart.fr.</p>
+
+<script>
+/* Jauge en forme de maison (toit du logo Bonapart) */
+var gaugeUid=0;
+function renderGauge(g,s){
+  var size=+g.dataset.size||40, id=g.dataset.gid||('hc'+(gaugeUid++)); g.dataset.gid=id; g.dataset.score=s;
+  var color = s>=80?'#85C441':(s>=40?'#FF9F43':'#C9C7D4');
+  var house='M24 3 L45 20 L41 20 L41 45 L7 45 L7 20 L3 20 Z';
+  var h=Math.round(42*s/100);
+  g.innerHTML='<svg width="'+size+'" height="'+size+'" viewBox="0 0 48 48" role="img" aria-label="Score de qualification '+s+' sur 100">'+
+    '<defs><clipPath id="'+id+'"><path d="'+house+'"/></clipPath></defs>'+
+    '<path d="'+house+'" fill="#F0EFF2"/>'+
+    '<rect class="fill" clip-path="url(#'+id+')" x="0" y="'+(45-h)+'" width="48" height="'+h+'" fill="'+color+'"/>'+
+    '<rect x="33" y="6" width="5" height="9" rx="1" fill="'+(s>=95?color:'#E4E3EA')+'"/>'+
+    '<path d="'+house+'" fill="none" stroke="'+(s>0?color:'#C9C7D4')+'" stroke-width="2.4" stroke-linejoin="round"/>'+
+    '</svg><b style="font-size:'+Math.max(9,Math.round(size*0.28))+'px;color:'+(s>=40?'#fff':'#3C3956')+'">'+s+'</b>';
+}
+document.querySelectorAll('.gauge').forEach(function(g){renderGauge(g,+g.dataset.score);});
+
+/* Reprendre la main */
+(function(){
+  var b=document.getElementById('takeBtn'),l=document.getElementById('liveState'),c=document.getElementById('composeTxt');
+  b.addEventListener('click',function(){
+    var on=b.getAttribute('aria-pressed')!=='true';
+    b.setAttribute('aria-pressed',on);b.classList.toggle('on',on);
+    b.textContent=on?'Rendre à l’IA':'Reprendre';
+    l.textContent=on?'Vous répondez':'Assistant actif';l.classList.toggle('off',on);
+    c.lastChild.textContent=on?'Écrire à Camille…':'L’assistant répond pour vous';
+  });
+})();
+
+/* Valider la visite */
+(function(){
+  var btn=document.getElementById('validateBtn'),scr=document.getElementById('visitScreen'),ev=document.getElementById('evProv'),inp=document.getElementById('rdv');
+  btn.addEventListener('click',function(){
+    if(!inp.value.trim()){inp.value='Devant l’immeuble, à confirmer par l’agent';}
+    scr.classList.add('confirmed');
+    ev.className='ev conf';ev.textContent='Visite, Camille Rousseau';
+  });
+})();
+
+/* Vue iPhone / ordinateur */
+(function(){
+  var tabs=document.querySelectorAll('.switch button');
+  function fit(){document.querySelectorAll('.stage').forEach(function(st){var app=st.firstElementChild;var w=+st.dataset.w||1280,h=+st.dataset.h||840;var k=st.clientWidth/w;app.style.transform='scale('+k+')';st.style.height=(h*k)+'px';});}
+  tabs.forEach(function(t){t.addEventListener('click',function(){
+    tabs.forEach(function(x){x.setAttribute('aria-selected',x===t);});
+    document.querySelectorAll('.view').forEach(function(v){v.hidden=v.dataset.view!==t.dataset.target;});
+    fit();
+  });});
+  window.addEventListener('resize',fit);fit();
+  if(location.hash==='#ordinateur'){tabs[1].click();}
+  /* reprendre la main, ordinateur */
+  var b=document.getElementById('takeBtnD'),l=document.getElementById('liveStateD'),c=document.querySelector('#composeTxtD span');
+  b.addEventListener('click',function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);b.classList.toggle('on',on);
+    b.textContent=on?'Rendre à l’IA':'Reprendre la main';l.textContent=on?'Vous répondez':'Assistant actif';l.classList.toggle('off',on);
+    c.textContent=on?'Écrire à Camille…':'L’assistant répond pour vous. Reprenez la main pour écrire.';});
+  /* valider, ordinateur */
+  document.getElementById('vmOk').addEventListener('click',function(){var v=document.getElementById('visitMini');v.classList.add('done');
+    document.getElementById('vmTitle').textContent='Visite confirmée';document.getElementById('vmText').textContent='Invitation et lieu envoyés à Camille. Rappel la veille.';});
+})();
+
+/* ---------- Démo animée ---------- */
+(function(){
+  var RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $=function(q,r){return (r||document).querySelector(q)}, $$=function(q,r){return Array.prototype.slice.call((r||document).querySelectorAll(q))};
+  function Stop(){}
+  function mk(sc){ var t=++sc.tok; return function(ms){return new Promise(function(res,rej){setTimeout(function(){ if(t!==sc.tok) rej(new Stop()); else res(); }, RM?0:ms);});}; }
+  async function type(el,txt,w,speed){ el.classList.add('caret'); el.textContent=''; for(var i=0;i<txt.length;i++){ el.textContent+=txt[i]; await w(speed||28);} el.classList.remove('caret'); }
+  function scrollBottom(box){ box.scrollTop=box.scrollHeight; }
+  function fillRow(f,i,val,score){ var r=$('[data-r="'+i+'"]',f); r.classList.add('on','flash'); $('b',r).textContent=val; setTimeout(function(){r.classList.remove('flash')},900);
+    if(score!=null){ renderGauge($('.top .gauge',f),score); $('.fbar i',f).style.width=score+'%'; } }
+  function resetFiche(f){ $$('.frow',f).forEach(function(r){r.classList.remove('on','flash'); $('b',r).textContent='En attente';}); renderGauge($('.top .gauge',f),0); $('.fbar i',f).style.width='0%'; }
+  var ficheVals=[[1,'Résidence principale, premier achat',20],[2,'Accord de principe, 500 000 €',60],[3,'Aucun',80],[4,'Jeudi fin de journée, samedi matin',null]];
+
+  var S={};
+  /* 1. Formulaire */
+  S[1]={tok:0,reset:function(){ $$('#sc1 .wf span').forEach(function(e){e.textContent='';e.classList.remove('caret')}); $$('#sc1 .wf').forEach(function(e){e.classList.remove('on')});
+      $('#s1chk').classList.remove('on'); $('#s1sent').classList.remove('on'); $('#s1scroll').style.transform='none'; $('#s1btn').classList.remove('press'); },
+    play:async function(w){ var v=['Thomas Martin','thomas.martin@exemple.fr','06 12 34 56 78','Bonjour, cet appartement est-il toujours disponible ? Nous aimerions le visiter.'];
+      await w(500); await w(300);
+      for(var i=1;i<=4;i++){ var f=$('#sc1 [data-f="'+i+'"]'); f.classList.add('on'); await type($('span',f),v[i-1],w,i===4?18:32); f.classList.remove('on'); await w(150); }
+      $('#s1chk').classList.add('on'); await w(500); $('#s1btn').classList.add('press'); await w(250); $('#s1btn').classList.remove('press'); await w(200); $('#s1sent').classList.add('on'); },
+    final:function(){ this.reset(); var v=['Thomas Martin','thomas.martin@exemple.fr','06 12 34 56 78','Bonjour, cet appartement est-il toujours disponible ? Nous aimerions le visiter.'];
+      $$('#sc1 .wf span').forEach(function(e,i){e.textContent=v[i]}); $('#s1chk').classList.add('on'); $('#s1sent').classList.add('on'); }};
+  /* 2. Chrono */
+  S[2]={tok:0,reset:function(){ $('#s2lead').classList.remove('on'); $('#s2toast').classList.remove('on'); $$('#sc2 .qsteps li').forEach(function(l){l.classList.remove('on')});
+      $('#s2done').classList.remove('on'); $('#s2clock').textContent='00:00'; $('#s2ring').style.strokeDashoffset=163.4; },
+    play:async function(w){ await w(400); $('#s2toast').classList.add('on'); $('#s2lead').classList.add('on'); await w(900); $('#s2toast').classList.remove('on');
+      var marks={2:1,4:2,5:3,47:4};
+      for(var sec=0;sec<=47;sec++){ $('#s2clock').textContent='00:'+(sec<10?'0':'')+sec; $('#s2ring').style.strokeDashoffset=163.4*(1-sec/47);
+        if(marks[sec]) $('#sc2 [data-q="'+marks[sec]+'"]').classList.add('on'); await w(sec<6?260:70); }
+      await w(200); $('#s2done').classList.add('on'); },
+    final:function(){ $('#s2lead').classList.add('on'); $$('#sc2 .qsteps li').forEach(function(l){l.classList.add('on')}); $('#s2clock').textContent='00:47'; $('#s2ring').style.strokeDashoffset=0; $('#s2done').classList.add('on'); }};
+  /* 3. Qualification */
+  S[3]={tok:0,reset:function(){ $$('#s3thread .m').forEach(function(m){m.classList.remove('on')}); $('#s3typing').classList.remove('on'); resetFiche($('#s3fiche')); $('#s3thread').scrollTop=0; },
+    play:async function(w){ var ms=$$('#s3thread .m'), box=$('#s3thread'), f=$('#s3fiche'); await w(400);
+      for(var i=0;i<ms.length;i++){ var isAi=ms[i].classList.contains('ai'); if(isAi && i>0){ box.appendChild($('#s3typing')); $('#s3typing').classList.add('on'); scrollBottom(box); await w(900); $('#s3typing').classList.remove('on'); }
+        ms[i].classList.add('on'); scrollBottom(box);
+        if(!isAi){ var k=(i-1)/2; if(ficheVals[k]){ await w(450); fillRow(f,ficheVals[k][0],ficheVals[k][1],ficheVals[k][2]); } }
+        await w(isAi?900:700); } },
+    final:function(){ $$('#s3thread .m').forEach(function(m){m.classList.add('on')}); var f=$('#s3fiche'); ficheVals.forEach(function(v){fillRow(f,v[0],v[1],v[2]!=null?v[2]:undefined)}); renderGauge($('.top .gauge',f),80); $('.fbar i',f).style.width='80%'; scrollBottom($('#s3thread')); }};
+  /* 4. Réservation */
+  S[4]={tok:0,reset:function(){ $$('#s4thread .m').forEach(function(m,i){m.classList.toggle('on',i<2)}); $('#s4web').classList.remove('on'); $('#s4ok').classList.remove('on'); $('#s4t1').classList.remove('sel'); $('#s4slot').classList.remove('pick','tap');
+      $('#s4ev').classList.remove('on'); var f=$('#s4fiche'); resetFiche(f); ficheVals.forEach(function(v){fillRow(f,v[0],v[1])}); $$('.frow',f).forEach(function(r){r.classList.remove('flash')}); renderGauge($('.top .gauge',f),80); $('.fbar i',f).style.width='80%'; $('#s4thread').scrollTop=0; },
+    play:async function(w){ var ms=$$('#s4thread .m'), box=$('#s4thread'), f=$('#s4fiche'); await w(900);
+      $('#s4slot').classList.add('tap','pick'); await w(250); $('#s4slot').classList.remove('tap'); await w(250);
+      $('#s4web').classList.add('on'); await w(900); $('#s4t1').classList.add('sel'); await w(800); $('#s4btn').classList.add('press'); await w(220); $('#s4btn').classList.remove('press');
+      $('#s4ok').classList.add('on'); $('#s4ev').classList.add('on'); fillRow(f,5,'Jeudi 29 oct., 18:30, à valider'); await w(1800);
+      $('#s4web').classList.remove('on'); await w(600);
+      ms[2].classList.add('on'); scrollBottom(box); await w(800);
+      box.appendChild($('#s4typing')); $('#s4typing').classList.add('on'); scrollBottom(box); await w(1100); $('#s4typing').classList.remove('on'); ms[3].classList.add('on'); scrollBottom(box); },
+    final:function(){ this.reset(); $$('#s4thread .m').forEach(function(m){m.classList.add('on')}); $('#s4slot').classList.add('pick'); $('#s4ev').classList.add('on'); fillRow($('#s4fiche'),5,'Jeudi 29 oct., 18:30, à valider'); scrollBottom($('#s4thread')); }};
+  /* 5. Matin */
+  S[5]={tok:0,reset:function(){ $('#s5lock').classList.remove('off'); $('#s5n1').classList.remove('on'); $('#s5n2').classList.remove('on'); $('#s5app').classList.remove('confirmed'); $('#s5rdv').value='';
+      $('#s5mail').classList.remove('on'); renderGauge($('#s5g'),80); },
+    play:async function(w){ await w(500); $('#s5n1').classList.add('on'); await w(700); $('#s5n2').classList.add('on'); await w(1400); $('#s5lock').classList.add('off'); await w(800);
+      var inp=$('#s5rdv'), txt='Devant l’agence, 92 rue de la Convention'; for(var i=0;i<txt.length;i++){ inp.value+=txt[i]; await w(22);} await w(500);
+      $('#s5btn').style.transform='scale(.96)'; await w(200); $('#s5btn').style.transform=''; $('#s5app').classList.add('confirmed'); renderGauge($('#s5g'),100); await w(900); $('#s5mail').classList.add('on'); },
+    final:function(){ $('#s5lock').classList.add('off'); $('#s5rdv').value='Devant l’agence, 92 rue de la Convention'; $('#s5app').classList.add('confirmed'); renderGauge($('#s5g'),100); $('#s5mail').classList.add('on'); }};
+
+  var auto=false;
+  async function run(n){ var sc=S[n]; sc.reset(); var w=mk(sc); try{ await sc.play(w); sc.done=true; }catch(e){ if(!(e instanceof Stop)) throw e; } }
+  if(RM){ Object.keys(S).forEach(function(k){S[k].final()}); }
+  else {
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ var n=+e.target.dataset.scene; if(e.isIntersecting && !S[n].started && !auto){ S[n].started=true; run(n); } }); },{threshold:.45});
+    $$('.scene').forEach(function(sc){ io.observe(sc); });
+  }
+  $$('[data-replay]').forEach(function(b){ b.addEventListener('click',function(){ run(+b.dataset.replay); }); });
+  $('#playAll').addEventListener('click',async function(){
+    auto=true; Object.keys(S).forEach(function(k){S[k].started=true; S[k].tok++; S[k].reset();});
+    for(var n=1;n<=5;n++){ $('#sc'+n).scrollIntoView({behavior:RM?'auto':'smooth',block:'center'}); await new Promise(function(r){setTimeout(r,RM?0:900)}); await run(n); await new Promise(function(r){setTimeout(r,RM?0:1500)}); }
+    auto=false;
+  });
+})();
+
+
+</script>
+</body>
+</html>
