@@ -34,6 +34,11 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 button:focus-visible,input:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
 img{display:block}
 
+/* ---------- Mention de propriété ---------- */
+.legal-bar{background:var(--navy);color:#fff;font-size:13px;line-height:1.45;text-align:center;padding:9px 16px}
+.legal-bar strong{font-weight:700}
+@media (max-width:640px){.legal-bar{font-size:12px;padding:8px 16px}}
+
 /* ---------- Page ---------- */
 .page-head{background:var(--white);border-bottom:1px solid var(--line)}
 .page-head-in{max-width:1500px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;gap:20px;justify-content:space-between}
@@ -718,6 +723,8 @@ img{display:block}
 </style>
 </head>
 <body>
+
+<div class="legal-bar" role="note"><strong>© 2026 Quentin Duplessis. Document confidentiel, propriété de son auteur.</strong> Réservé à Bonapart : toute diffusion, reproduction ou réutilisation est interdite sans son accord écrit.</div>
 
 <header class="page-head">
   <div class="page-head-in">
